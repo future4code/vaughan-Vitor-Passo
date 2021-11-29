@@ -22,15 +22,21 @@ console.log("Olá", nome, "você tem" , idade, "anos");
 
 
 */
- // 2-Questão
- /*let pergunta = "Voce gosta de chocolate";
- console.log(pergunta, "- Sim");
- let pergunta2 = "Voce gosta de djonga";
- console.log(pergunta2, "- Sim");
- let pergunta3 = "Voce torce para o flamengo";
- console.log(pergunta3, "- Não");
-*/
+ 
+// 2-Questão
 
+/*
+let pergunta = "Voce gosta de chocolate-";
+ let resposta = prompt("Voce gosta de chocolate");
+ console.log(pergunta, resposta);
+
+ let pergunta2 = "Voce gosta de djonga-";
+ let resposta2 = prompt("Voce gosta de djonga");
+ console.log(pergunta2, resposta2);
+ let pergunta3 = "Voce torce para o flamengo-";
+ let resposta3 = prompt("Voce torce para o flamengo");
+ console.log(pergunta3, resposta3);
+ */
 
 //3-Questão
 /*
