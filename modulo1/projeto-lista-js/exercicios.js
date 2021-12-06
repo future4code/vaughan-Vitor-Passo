@@ -166,13 +166,9 @@ function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
    
   
-  if (ano % 400 === 0) {
+  if (ano % 400 === 0 && ano % 4 === 0 && ano % 100 !==0) {
     console.log(true)
   }  
-  else if(ano % 4 === 0 && ano % 100 !==0){
-  console.log(true)
-
-}
 else{
     console.log(false)
   }
