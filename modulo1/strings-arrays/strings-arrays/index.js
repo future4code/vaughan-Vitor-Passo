@@ -60,3 +60,16 @@
 //   //a parte de mostra o indice do abacaxi eu nao consegui!
 //  //console.log(acharIndice)
 //  console.log(frutas.length)
+function formatar(nome){
+        nome = nome.toLowerCase();
+         nome = nome.trim();
+         nome = nome.replaceAll(" ", "-");
+       console.log(nome);
+         nome = prompt("Quem é vc?")
+  
+         return nome;  
+      }
+  
+      const nome1 = formatar();
+     
+       alert(`Olá, ${nome1}`);
