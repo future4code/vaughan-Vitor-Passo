@@ -187,6 +187,9 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
+    let debitando = contas.compras;
+
+    return contas
 
 }
 
