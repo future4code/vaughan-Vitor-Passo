@@ -110,6 +110,31 @@ function classificaTriangulo(ladoA, ladoB, ladoC) {
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
+    let maiorNumero = 0;
+    let segundoMaiorNumero = 0
+    let menorNumero = Infinity
+    let segundoMenor = Infinity
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > maiorNumero) {
+            segundoMaiorNumero = maiorNumero
+            maiorNumero = array[i]
+        }
+        if (array[i] < maiorNumero && array[i] > segundoMaiorNumero) {
+            segundoMaiorNumero = array[i]
+        }
+        if (array[i] < menorNumero) {
+            segundoMenor = menorNumero
+            menorNumero = array[i]
+        }
+        if (array[i] > menorNumero && array[i] < segundoMenor) {
+            segundoMenor = array[i]
+        console.log(segundoMaiorNumero)      
+        }
+        console.log(segundoMenor)
+
+    }
+    return [segundoMaiorNumero, segundoMenor]
+    
   
 }
 
@@ -136,11 +161,27 @@ function retornaPessoaAnonimizada(pessoa) {
 
 // EXERCÍCIO 13A
 function retornaPessoasAutorizadas(pessoas) {
+//     - Ter, no mínimo, 1.5m de altura;
+// - Ser mais velho do que 14 anos e
+// - Ser mais novo do que 60 anos.
+const checando = pessoas.filter((validacao ) => {
+    return validacao.altura >= 1.5 && validacao.idade > 14 && validacao.idade <= 60
+    
+})
+console.log(checando)
+return checando
+
    
 }
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
+    const pessoasNaoAutoriradas = pessoas.filter((validacao) =>{
+        return validacao.altura < 1.5 || validacao.idade <= 14 || validacao.idade > 60
+        
+    })
+    console.log(pessoasNaoAutoriradas)
+    return pessoasNaoAutoriradas
   
 }
 
