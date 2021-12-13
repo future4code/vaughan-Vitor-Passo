@@ -187,23 +187,29 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
-    
+
     for (let i = 0; i < contas.compras.length; index++) {
         console.log(i)
     }
     // let debitando = contas.compras + 
 
-    
-
+    //nao consegui implentar um lógica
+    return contas
 }
-return contas
+
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-  
+    consultas.sort((a, b) => {
+        const ordenando = a.nome.localeCompare(b.nome)
+        return ordenando
+     })
+     return consultas
 }
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
+
+    
    
 }
