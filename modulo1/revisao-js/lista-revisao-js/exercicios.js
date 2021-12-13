@@ -187,11 +187,16 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
-    let debitando = contas.compras;
+    
+    for (let i = 0; i < contas.compras.length; index++) {
+        console.log(i)
+    }
+    // let debitando = contas.compras + 
 
-    return contas
+    
 
 }
+return contas
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
