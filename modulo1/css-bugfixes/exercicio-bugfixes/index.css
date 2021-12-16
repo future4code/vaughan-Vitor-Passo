@@ -40,7 +40,7 @@ div img {
 
 .botao-amarelo {
     position: absolute;
-    bottom: -75%;
+    bottom: -60%;
     left: 40%;
     /* display: block;
     margin: 0 auto;
@@ -74,13 +74,16 @@ div img {
   **/
 
 #container-de-descricao {
-    padding: 10%;
+ 
+    padding: 5%;
+   
     background-color: #2274a5;
     color: white;
 }
 
 #container-de-descricao>ol {
-    padding: 15px 400px;
+    
+    padding: 15px 480px;
 }
 
 #container-para-comprar {
