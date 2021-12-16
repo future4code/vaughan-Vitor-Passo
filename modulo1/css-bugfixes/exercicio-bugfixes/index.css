@@ -122,6 +122,7 @@ td button {
 }
 
 .container-do-search {
+    
     margin-top: 20px;
     height: 100px;
 }
@@ -143,4 +144,10 @@ td button {
 img{
     width: 45px;
     height: 40px;
+}
+#lupa{
+    background-color: rgb(255, 255, 255);
+}
+#calca{
+    background-color: white;
 }
