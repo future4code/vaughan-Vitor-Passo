@@ -105,6 +105,7 @@ div img {
 
 div:nth-child(2),
 div:last-child {
+   
     text-align: center;
 }
 
@@ -158,4 +159,13 @@ img{
 }
 #calca{
     background-color: white;
+}
+
+#search-bar{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+   border-width: 3px;
+   border-color: black;
+   
 }
