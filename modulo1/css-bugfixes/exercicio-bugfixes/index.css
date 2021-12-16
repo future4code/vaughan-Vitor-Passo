@@ -39,6 +39,10 @@ div img {
 }
 
 .botao-amarelo {
+    position: absolute;
+    
+    bottom: -25%;
+    left: 40%;
     background-color: #ffaf43;
     width: 250px;
     height: 40px;
@@ -85,6 +89,7 @@ div img {
     padding: 100px 0;
     font-size: 60px;
 }
+
 
 
 /**
