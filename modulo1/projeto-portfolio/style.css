@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    background-color: rgb(246, 203, 111);
+}
+.container h1{
+    
+    font-family: "eurostile", sans-serif;
+    color: #141414;
+}
+.container a{
+    margin: 20px;
+    border: solid;
+    border-color: rgb(221, 30, 30);
+    color: rgb(3, 3, 3);
+    background-color: #ffffff;
+    font-size: 10%solid;
+    transition: 1s;
+}
+a:hover{
+    background-color: rgb(221, 110, 204);
+    color: rgb(2, 1, 1);
+    
+}
+.container h2{
+    font-family: 32px "eurostile", sans-serif;
+    position: relative;
+    bottom: -50px;
+    left: 500px;
+    color: #141414
+}
+.container h3{
+    font-family: 32px "eurostile", sans-serif;
+    position: relative;
+    bottom: -50px;
+    left: 500px;
+    color: #141414
+  
+}
+ol{
+    font-family: 32px "eurostile", sans-serif;
+    position: relative;
+    bottom: -50px;
+    left: 500px;
+   
+    color: #141414;
+    
+}
+
+
+
+/* .imagem-principal{
+    position: relative;
+    left: 400px;
+    top: 30px;
+   
+} */
+.container img{
+    width: 300px;
+    height: 300px;
+    position: relative;
+    left: 460px;
+    top: 25px;
+}
+
+
+.container p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+}
+
