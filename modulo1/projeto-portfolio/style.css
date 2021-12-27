@@ -4,9 +4,10 @@
 }
 .container{
     background-color: rgb(246, 203, 111);
+    
 }
 .container h1{
-    
+
     font-family: "eurostile", sans-serif;
     color: #141414;
 }
@@ -22,31 +23,32 @@
 a:hover{
     background-color: rgb(221, 110, 204);
     color: rgb(2, 1, 1);
-    
+    transition: 1s;
+
 }
 .container h2{
     font-family: 32px "eurostile", sans-serif;
-    position: relative;
-    bottom: -50px;
+    /* position: relative;
+    bottom: -50px; */
     left: 500px;
     color: #141414
 }
 .container h3{
     font-family: 32px "eurostile", sans-serif;
-    position: relative;
+    /* position: relative;
     bottom: -50px;
-    left: 500px;
+    left: 500px; */
     color: #141414
-  
+
 }
 ol{
     font-family: 32px "eurostile", sans-serif;
-    position: relative;
+    /* position: relative;
     bottom: -50px;
-    left: 500px;
-   
+    left: 500px; */
+
     color: #141414;
-    
+
 }
 
 
@@ -55,19 +57,88 @@ ol{
     position: relative;
     left: 400px;
     top: 30px;
-   
+
 } */
 .container img{
     width: 300px;
     height: 300px;
     position: relative;
     left: 460px;
-    top: 25px;
+    top: 10px;
 }
-
 
 .container p{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 18px;
+    color: white;
 }
+
+#lista{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #f8a232;
+    text-align: center;
+    border: solid;
+
+    color: #141414;
+}
+
+.container form {
+    font-size: 16px;
+    background-color: #CCC;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 10px 10px 10px;
+}
+#h2-formulario{
+    text-align: center;
+    color: #333;
+}
+.container input, textarea{
+    width: 470px;
+    margin: 5px;
+    padding: 12px;
+}
+.container button{
+    background-color: #069;
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    left: 100px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid;
+    color: #FFF;
+     
+}
+button:hover{
+    
+    background-color: blueviolet;
+
+}
+button:active{
+    background-color: brown;
+    color: black;
+}
+.container textarea{
+    width: 470px;
+    height: 250px;
+    line-height: 20px;
+}
+
+.roda-pe{
+    margin: 0 auto;
+    width: 300px;
+    background-color: #fafafa;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #141414;
+    border: solid;
+    border-radius: 15px;
+}
+
+.roda-pe img{
+    width: 50px;
+    height: 50px;
+}
+
+
 
