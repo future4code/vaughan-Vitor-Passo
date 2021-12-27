@@ -3,7 +3,8 @@
     padding: 0;
 }
 .container{
-    background-color: rgb(246, 203, 111);
+    /* background-color: rgb(246, 203, 111); */
+     background-color: burlywood;
     
 }
 .container h1{
@@ -65,6 +66,7 @@ ol{
     position: relative;
     left: 460px;
     top: 10px;
+    border: 0;
 }
 
 .container p{
@@ -75,7 +77,8 @@ ol{
 
 #lista{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: #f8a232;
+    background-color: rgb(246, 203, 111);
+   
     text-align: center;
     border: solid;
 
