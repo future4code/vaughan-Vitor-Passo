@@ -1,3 +1,4 @@
+
 .welcome{
     color: white;
     background-color: #fd6a22;
@@ -23,15 +24,17 @@
 
 a{
     margin: 5px;
-    color: rgb(251, 177, 159);
-    /* background-color: #ffaa9b; */
+    color: #563333;
+    background-color: #ffaa9b;
+    text-decoration: none;
+   border: solid;
     transition: 1s;
     font-family: Arial, Helvetica, sans-serif;
 
 }
 
 a:hover{
-    color: rgb(192, 53, 18);
+    color: #f8e9db;
     
     
 }
@@ -53,8 +56,9 @@ td {
     margin: 0 auto;
     width: 200px;
 }
-body{
-    margin: 0;
+body, ul{
+    margin: 0px;
+    padding: 0px;
   
 }
 
