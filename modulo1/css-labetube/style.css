@@ -25,30 +25,29 @@ main{
     
     bottom: 50px;
     margin: 10px;
-
+    gap: 10px;
     overflow-y: scroll;
 }
 img{
-    display: flex;
-    
     /* border: solid; */
-    width: 300px;
-    height: 300px;
-    box-shadow: 2px 2px 5px black;
+    width: 200px;
+    height: 200px;
 
 }
-video{
-    display: flex;
-    
-    border: solid;
-    width: 300px;
-    height: 300px;
-}
+
 /* .video{
      
     row-gap: 10px;
     margin-bottom: -100px; 
 
+} */
+.video{
+  
+    box-shadow: 2px 2px 5px black;
+    
+}
+/* #teste{
+    width: 100%;
 } */
 
 footer{
