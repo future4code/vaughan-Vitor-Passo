@@ -60,7 +60,7 @@ main {
 .container-5{
     position: relative;
     top: 100px;
-    
+
 }
 .container-6{
     position: relative;
@@ -103,4 +103,4 @@ footer {
     justify-content: center;
     align-items: center;
     background-color: mediumvioletred;
-}
+} 
