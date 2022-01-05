@@ -19,6 +19,14 @@ h1{
     position: relative;
     left: 5px;
 }
+
+    @media screen and (max-device-width: 400px) {
+        video {
+           width: 90%;
+            height: 90%;
+           
+          }
+}
 a{
     color: black;
     text-decoration: none;
