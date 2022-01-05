@@ -8,12 +8,10 @@ header{
     align-items: center;
     background-color: #EF843A;
     
-
 }
 body{
     height: 100vh;
     display: grid;
-
 
 }
 main{
@@ -31,22 +29,28 @@ main{
 }
 img{
     /* border: solid; */
-    width: 350px;
-    height: 300px;
+         width: 350px;
+         height: 300px;
 
 }
 
-/* .video{
-     
-    row-gap: 10px;
-    margin-bottom: -100px; 
 
-} */
+
 .video{
   
     box-shadow: 2px 2px 5px black;
     
 }
+
+@media screen and (max-device-width: 600px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
+        height: 100vh;
+      }
+
+} 
 /* #teste{
     width: 100%;
 } */
