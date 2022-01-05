@@ -23,15 +23,16 @@ main{
         /* grid-template-rows: repeat(2, 1fr); */
         grid-template-columns: repeat(4, 1fr);
     
-    bottom: 50px;
-    margin: 10px;
+     bottom: 50px;
+    margin: 10px; 
     gap: 10px;
     overflow-y: scroll;
+    
 }
 img{
     /* border: solid; */
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 300px;
 
 }
 
