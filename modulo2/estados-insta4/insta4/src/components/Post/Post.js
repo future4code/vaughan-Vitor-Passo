@@ -44,7 +44,7 @@ class Post extends React.Component {
   state = {
     curtido: false,
     numeroCurtidas: 0,
-    comentando: true,
+    comentando: '',
     numeroComentarios: 10
   }
 
@@ -62,8 +62,6 @@ class Post extends React.Component {
     }
    
     
-    
-    
   }
   
 
@@ -75,12 +73,22 @@ class Post extends React.Component {
 
   aoEnviarComentario = () => {
     this.setState({
-      comentando: false,
+  
+      
+      
       numeroComentarios: this.state.numeroComentarios + 1
+        
     })
+   
+    
+   
   }
 
+  
+
   render() {
+
+    
     let iconeCurtida
 
     if(this.state.curtido) {
