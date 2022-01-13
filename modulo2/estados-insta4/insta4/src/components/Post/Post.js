@@ -60,11 +60,9 @@ class Post extends React.Component {
       this.setState({numeroCurtidas: this.state.numeroCurtidas = 0})
      
     }
-   
-    
+     
   }
   
-
   onClickComentario = () => {
     this.setState({
       comentando: !this.state.comentando
