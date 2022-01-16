@@ -2,6 +2,7 @@ import React from "react";
 
 class SendMenssage extends React.Component {
   state = {
+    mensagem: [],
     inputUser: "",
     inputContent: ""
   };
@@ -14,21 +15,42 @@ class SendMenssage extends React.Component {
     this.setState({ inputContent: event.target.value });
   };
 
+  adicionarMensagem = () => {
+    const novaMensagem = {
+      user: this.state.inputUser,
+      content: this.state.inputContent
+    };
+
+    const newMessage = [...this.state.mensagem, novaMensagem];
+    this.setState({ mensagem: newMessage });
+    this.setState({ inputContent: "" });
+  };
+
   render() {
+    const listaMensagem = this.state.mensagem.map((msg) => {
+      return (
+        <div>
+          <p>
+            {msg.user} : {msg.content}
+          </p>
+        </div>
+      );
+    });
     return (
       <div>
         <input
-          value={this.setState.inputUser}
+          value={this.state.inputUser}
           onChange={this.onChangeUser}
           placeholder="Usuário"
         />
         <input
-          value={this.setState.inputContent}
+          value={this.state.inputContent}
           onChange={this.onChangeContent}
-          placeholder="Usuário"
+          placeholder="Mensagem"
         />
 
-        <button>Enviar</button>
+        <button onClick={this.adicionarMensagem}>Enviar</button>
+        <div>{listaMensagem}</div>
       </div>
     );
   }
