@@ -20,9 +20,9 @@ const InputsContainer = styled.div`
 
 class App extends React.Component {
     state = {
-      tarefas: [ {
+      tarefas: [{
         id: Date.now(),
-        texto: 'Texto da tarefa',
+	      texto: "sei la",
 	      completa: false 
       }
     ],
@@ -30,12 +30,17 @@ class App extends React.Component {
       filtro: ''
     }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+
+   
+    
+    
 
   };
 
   componentDidMount() {
-
+    this.criaTarefa();
+    const textoUp = localStorage.getItem("texto")
   };
 
   onChangeInput = (event) => {
@@ -51,35 +56,37 @@ class App extends React.Component {
        const incluindoTarefa =  [...this.state.tarefas, novaTarefa]
             
        console.log(incluindoTarefa)
+       localStorage.setItem("tarefas", JSON.stringify(incluindoTarefa));
        this.setState({
          tarefas: incluindoTarefa,
          inputValue: ""
         })
+        
        
       }
 
   selectTarefa = (id) => {
-    const alterandoTarefa = this.state.tarefas.map = ((doneId) =>{
-      if (id === doneId.id) {
-        const altertandoComplta = {
+    const alterandoTarefa = this.state.tarefas.map((doneId) =>{
+      if(id === doneId.id){
+        const seiLa = {
           ...doneId,
           completa: true
-
+       
         }
-        return altertandoComplta
+      return seiLa
       }
-     
     })
 
     this.setState({tarefas : alterandoTarefa})
   }
 
   onChangeFilter = (event) => {
+    this.setState({filtro: event.target.value})
 
   }
 
   render() {
-    const listaFiltrada = this.state.tarefas.filter(tarefa => {
+    const listaFiltrada = this.state.tarefas.filter((tarefa)=>{
       switch (this.state.filtro) {
         case 'pendentes':
           return !tarefa.completa
