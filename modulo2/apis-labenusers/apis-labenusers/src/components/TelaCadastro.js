@@ -1,5 +1,9 @@
 import react from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+
+
 class telaCadastro extends react.Component{
 
     state = {

@@ -6,11 +6,27 @@ const CardUser = styled.div`
     border: 1px black solid;
     padding: 10px;
     margin: 10px;
-    width: 8rem;
+    width: 18rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+
+`
+const Borda = styled.div`
+   
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+`
+const H2 = styled.h2`
+   
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 `
 
@@ -51,7 +67,8 @@ class telaCadastro extends react.Component{
             {
             Authorization: "vitor-passo-vaughan"
         }}
-        axios.delete(url, axiosConfig)
+        if (window.confirm("Tem certeza que deseja deletar?")) {
+            axios.delete(url, axiosConfig)
         .then((res)=>{
             alert("Usuário(a) excluído com sucesso!")
             this.getAllUsers()
@@ -60,23 +77,28 @@ class telaCadastro extends react.Component{
         .catch((err)=>{
             console.log(err.response.data);
         })
+        }
+        
     }
 
     render(){
         const showUser = this.state.listaUsuarios.map((user)=>{
            
-              return <CardUser key={user.id}>
+              return (
+              <Borda>
+              <CardUser key={user.id}>
                   {user.name}
                   <button onClick={() => this.deleteUser(user.id)}>X</button>
+                  <button onClick={() => this.deleteUser(user.id)}>X</button>
                   </CardUser> 
-        
-          
+                  </Borda>
+        )
           })
         return (
         <div>
 
             <button onClick={this.props.gotelaCadastro}>Tela De Cadastro</button>
-            <h2>Lista De Usuários</h2>
+            <H2>Lista De Usuários</H2>
             {showUser}
         </div>
         )
