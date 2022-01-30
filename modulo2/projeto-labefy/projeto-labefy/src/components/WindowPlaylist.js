@@ -1,6 +1,7 @@
 import react from "react";
 import axios from "axios";
 import styled from "styled-components";
+import DetalhePlaylist from "./DetalhePlaylist";
 const CardPlayList = styled.div`
  border: 1px black solid;
     padding: 10px;
@@ -54,8 +55,13 @@ const ButaoExclui = styled.button`
 class WindowPlaylist extends react.Component {
 
     state = {
+      
         playlist: []
     }
+
+   
+    
+
 
     componentDidMount = () => {
         this.getPlaylist()
@@ -106,18 +112,16 @@ class WindowPlaylist extends react.Component {
      
     }
 
-    
-
-   
 
     render() {
         const listaPlaylist = this.state.playlist.map((music)=>{
             return (
                 <Borda>
               <CardPlayList key={music.id} >
+                  <button  onClick={this.props.telaDetalhe}> Detalhes</button>
              
-                {/* {music.name} */}
-                <button onClick={this.props.detalhes}>{music.name}</button>
+                {music.name}
+               
                 <ButaoExclui onClick={() =>this.deletePlaylist(music.id)}>X</ButaoExclui>
               </CardPlayList>
               </Borda>
@@ -127,6 +131,7 @@ class WindowPlaylist extends react.Component {
             <div>
                 <Butao onClick={this.props.telaPrincial}>Voltar</Butao>
              {listaPlaylist}
+           
             
             </div>
           

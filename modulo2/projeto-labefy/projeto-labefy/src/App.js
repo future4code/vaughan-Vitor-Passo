@@ -2,6 +2,7 @@ import react from "react";
 import WindowPlaylist from "./components/WindowPlaylist";
 
 import WindowAddPlaylist from "./components/WindowAddPlayList";
+import DetalhePlaylist from "./components/DetalhePlaylist";
 
 
 
@@ -26,9 +27,11 @@ class App extends react.Component {
  changeWindow = () =>{
    switch (this.state.tela) {
      case "principal":
-       return <WindowAddPlaylist telaPlayList={this.telaPlayList} />
+       return <WindowAddPlaylist telaPlayList={this.telaPlayList}  />
      case "playlist":
-      return <WindowPlaylist telaPrincial={this.telaPrincial} />
+      return <WindowPlaylist telaPrincial={this.telaPrincial} telaDetalhe={this.telaDetalhe}  />
+      case "detalhes":
+      return <DetalhePlaylist jhordan = {this.telaPlayList}/>
    
      default:
        return <h2>Erro! Página não encontrada!</h2>
@@ -42,6 +45,9 @@ class App extends react.Component {
  }
  telaPlayList = () =>{
   this.setState({tela: "playlist"})
+ }
+ telaDetalhe = () =>{
+  this.setState({tela: "detalhes"})
  }
 
 
