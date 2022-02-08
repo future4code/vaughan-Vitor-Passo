@@ -9,17 +9,48 @@ import iconeCoracaoPreto from '../../img/favorite.svg'
 import iconeComentario from '../../img/comment_icon.svg'
 
 const Post = (props) => {
+  const [curtida, setCurtida] = useState(false)
+  const [numeroCurtida, setNumeroCurtida] = useState(0)
+  const [comentando, setComentando] = useState(false)
+  const [numeroComentarios, setNumeroComentarios] = useState(0)
+  const [comentarios, setComentarios] = useState([])
+
 
 
   const onClickCurtida = () => {
+    if (curtida) {
+      setCurtida(!curtida)
+      setNumeroCurtida(numeroCurtida - 1)
+    }
+    else{
+      setCurtida(!curtida)
+      setNumeroCurtida(numeroCurtida + 1)
+    }
   };
 
   const onClickComentario = () => {
+    setComentando(!comentando)
   };
 
   const enviarComentario = (comentario) => {
+    const listaDeComentarios = [...comentarios, comentario]
+    setComentarios(listaDeComentarios)
+    setComentando(!comentando)
+    setNumeroComentarios(numeroComentarios + 1)
+    
   }
-
+  const iconeCurtida = curtida ? (iconeCoracaoPreto) : (iconeCoracaoBranco)
+  const caixaDeComentario = comentando ? (
+    <SecaoComentario enviarComentario={enviarComentario}/>
+  ) : (
+    comentarios.map((comentario, index) =>{
+      return(
+        <CommentContainer key={index}>
+          <p>{comentario}</p>
+        </CommentContainer>
+      )
+    })
+  )
   return (
     <PostContainer>
       <PostHeader>
@@ -31,19 +62,21 @@ const Post = (props) => {
 
       <PostFooter>
         <IconeComContador
-          // icone={iconeCurtida}
+          icone={iconeCurtida}
           onClickIcone={onClickCurtida}
-          // valorContador={numeroCurtidas}
+          valorContador={numeroCurtida}
         />
 
         <IconeComContador
           icone={iconeComentario}
           onClickIcone={onClickComentario}
-          // valorContador={numeroComentarios}
+          valorContador={numeroComentarios}
         />
       </PostFooter>
-      {/* {caixaDeComentario} */}
+      {caixaDeComentario}
+      
     </PostContainer>
+    
   )
 }
 
