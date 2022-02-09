@@ -8,8 +8,22 @@ import React, { useState, useEffect } from 'react';
   // método que roda após a montagem do componente
   useEffect(()=>{
     // props.pokemon
-    pegaPokemon();
-  }, []) 
+    // const pegaPokemon = pokeName => {
+    //   axios
+    //     .get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+    //     .then(response => {
+    //       // guarda as infos do pokemon no estado
+    //       // this.setState({ pokemon: response.data });
+    //       setPokemon(response.data)
+    //       console.log(pokemon)
+    //     })
+    //     .catch(err => {
+    //       console.log(err.response);
+    //     });
+    // };
+    // pegaPokemon(pokemon)
+    pegaPokemon()
+  }, [pokemon]) 
     
   // método que roda após a atualização do componente.
   // Um dos casos de atualização do componente é a
@@ -27,6 +41,7 @@ import React, { useState, useEffect } from 'react';
   // Isso permite que consigamos pegar as infos dos pokemons.
   // Nos métodos de ciclo de vida, ela é chamada passando como
   // parâmetro o nome de pokemon que está chegando como props.
+ 
   const pegaPokemon = pokeName => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
@@ -34,11 +49,13 @@ import React, { useState, useEffect } from 'react';
         // guarda as infos do pokemon no estado
         // this.setState({ pokemon: response.data });
         setPokemon(response.data)
+        console.log(pokemon)
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
       });
   };
+  pegaPokemon(pokemon)
 
     return (
       <div>

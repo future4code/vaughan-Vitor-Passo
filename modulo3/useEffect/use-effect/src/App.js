@@ -9,7 +9,8 @@ const App = () => {
   // método que roda após a montagem do componente
   useEffect(()=>{
     requestPoke()
-  }, [])
+    
+  }, [pokeName])
   const requestPoke = () => {
     // função axios que está batendo na API e buscando 151 pokemons
     axios
@@ -18,6 +19,7 @@ const App = () => {
         // função que está setando no estado os 151 pokemons
         setPokeList(response.data.results);
         console.log("Lista de pokemons", pokeList);
+        console.log("Lista dos nomes do pokemons", pokeName);
       })
       .catch(err => {
         console.log(err);
@@ -25,7 +27,7 @@ const App = () => {
     }
     const changePokeName = event => {
       setPokeName(event.target.value);
-      console.log(pokeName)
+      
     };
 
   return (
@@ -39,13 +41,14 @@ const App = () => {
           return (
             <option key={pokemon.name} value={pokemon.name}>
               {pokemon.name}
+              
             </option>
           );
         })}
       </select>
       {/* expressão booleana que renderiza o componente PokeCard,
         caso o valor de pokeName, no estado, seja true */}
-      {pokeName && <PokeCard pokemon={pokeName} />}
+      {pokeName && <PokeCard pokemons={pokeName} />}
     </div>
   );
 };
