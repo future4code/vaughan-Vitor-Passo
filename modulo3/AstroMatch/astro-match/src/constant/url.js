@@ -1,0 +1,1 @@
+export {baseUrl} from  "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/vitor-passo"
