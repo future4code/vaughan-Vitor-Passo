@@ -1,9 +1,5 @@
-
-
-const PaginaMatch = () =>{
-    return (
-        <h1>Aqui é a pagina de match</h1>
-    )
-}
-
-export default PaginaMatch
+import styled from "styled-components"
+export const TelaMatch = styled.div`
+    background-color: white;
+    
+`
