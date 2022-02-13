@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TelaInicial } from "./styled"
+import {TelaInicial, ImagemButao, TelaButao, Butao } from "./styled"
 import { BASE_URL } from "../../constant/url";
 import CardPerfil from "../../components/CardPerfil/CardPerfil.";
-import {fogoTinder} from "./img/fogo.png"
-import {x} from "./img/x.png"
+import fogoTinder from "./imagem/fogo.jpg"
+import x from "./imagem/x.png"
 const PaginaIncial = () => {
 
   const [perfil, setPerfil] = useState({})
@@ -73,10 +73,10 @@ const PaginaIncial = () => {
           id={perfil?.id}
         />
       </TelaInicial>
-      <div>
-        <button onClick={() => choosePerson(false)}>  <img src={x} alt={"Icone de deslike"}/> </button>
-        <button onClick={() => choosePerson(true)}><img src={fogoTinder} alt={"Icone de curtida"}/></button>
-      </div>
+      <TelaButao>
+        <Butao onClick={() => choosePerson(false)}>  <ImagemButao src={x} alt={"Icone de deslike"}/> </Butao>
+        <Butao onClick={() => choosePerson(true)}> <ImagemButao src={fogoTinder} alt={"Icone de curtida"}/> </Butao>
+      </TelaButao>
     </div>
   );
 };
