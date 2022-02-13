@@ -9,7 +9,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0%;
+  margin-top: 5%;
   margin-bottom: 12%;
   img {
     width: 100%;
@@ -20,9 +20,9 @@ export const Card = styled.div`
     box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
   }
   div {
-    height: auto;
+    height: 25%;
     position: absolute;
-    bottom: 0px;
+    bottom: -2px;
     width: 91%;
     background-image: linear-gradient(to right top, rgba(0, 0, 0, 1), transparent);
     color: white;
@@ -35,9 +35,12 @@ export const Card = styled.div`
   }
   
   h1, h2, h3, h4, h5, h6 {
-    display: inline;
+    position: relative;
+    top: 25px;
   }
   p {
-      font-size: 10px;
+      font-size: 16px;
+      position: relative;
+    top: 15px;
   }
 `
