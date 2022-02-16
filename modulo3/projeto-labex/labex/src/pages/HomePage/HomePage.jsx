@@ -1,11 +1,23 @@
+import { useNavigate } from "react-router-dom"
 const HomePage = () =>{
+    const navegando = useNavigate()
+    
+  
+    const telaViagens = () => {
+        navegando("viagem")
+
+    }
+    const telaAdm = () => {
+        navegando("adm")
+    }
+
+    
     
     return(
         <div>
-            
             <h1>Labex</h1>
-            <button>Ver Viagens</button>
-            <button>Área de Admin</button>
+            <button onClick={telaViagens}>Ver Viagens</button>
+            <button onClick={telaAdm}>Área de Admin</button>
         </div>
     )
 }

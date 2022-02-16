@@ -1,44 +1,23 @@
-import Home from "./pages/HomePage/HomePage"
-import { useState } from "react"
-import AdminHomePage from "./pages/AdminHomePage/AdminHomePage";
-import ListTripsPage from "./pages/ListTripsPage/ListTripsPage";
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import ListTripsPage from "./pages/ListTripsPage/ListTripsPage"
+import HomePage from "./pages/HomePage/HomePage"
+import AdminHomePage from "./pages/AdminHomePage/AdminHomePage"
+import ApplicationFormPage from "./pages/ApplicationFormPage/ApplicationFormPage"
+import ErroPage from "./pages/ErroPage/ErroPage"
+
 function App() {
-  const [trocaTela, setTrocaTela] = useState("viagem")
 
-  const mudandoTela = ()=>{
-      switch (trocaTela) {
-          case "home":
-              return <Home/>
-          case "viagem":
-              return <ListTripsPage 
-              telaViagens={telaViagens}
-              telaAdm={telaAdm}
-              />
-          case "adm":
-              return <AdminHomePage/>
-              
-          default:
-              return (
-                  <h1>Erro 404</h1>
-              )
-      }
-  }
-
-  const telaViagens = () =>{
-      setTrocaTela("viagem")
-      console.log("Alô viagem")
-  }
-  const telaAdm = () =>{
-      setTrocaTela("adm")
-      console.log("Alô adm")
-  }
 
   return (
-    <div className="App">
-      <h1>Alo labex</h1>
-      {mudandoTela()}
-      <Home/>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route  path={"/"} element={<HomePage/>} />
+      <Route  path={"viagem"} element={<ListTripsPage/>} />
+      <Route  path={"adm"} element={<AdminHomePage/>} />
+      <Route  path={"/viagem/Application"} element={<ApplicationFormPage/>}/>
+      <Route  path={"*"} element ={<ErroPage/>}/>
+    </Routes>
+    </BrowserRouter>
   );
 }
 

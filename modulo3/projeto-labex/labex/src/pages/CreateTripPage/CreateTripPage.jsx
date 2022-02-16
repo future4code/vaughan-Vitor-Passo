@@ -1,8 +1,8 @@
 const CreateTripPage = () =>{
     return (
-        <ddiv>
+        <div>
             <h1>Aqui é a pagina de criacao da trip. nao sei oq é isso, socorro!</h1>
-        </ddiv>
+        </div>
     )
 }
 export default CreateTripPage
