@@ -3,19 +3,17 @@ import { BASE_URL } from "../../constant/Url"
 import { useEffect, useState } from "react"
 import { CardContainer } from "./styled"
 import axios from "axios"
+import CardTrips from "../../components/CardTrips/CardTrips"
 const AdminHomePage = (props) =>{
     
     const [listandoNome, setNome] = useState([]) 
-
+    const token = window.localStorage.getItem("token")
     useEffect(()=>{
         pegandoListTrips()
-    })
+    }, [listandoNome])
 
-   
     const navegando = useNavigate()
-    const voltar = () =>{
-        navegando(-1)
-    }
+    
 
     const detalhes = (id) =>{
         navegando(`${id}`)
@@ -30,23 +28,34 @@ const AdminHomePage = (props) =>{
         .catch((error)=>{
             console.log(error.response);
         })
+    }   
+    const axiosConfig = {
+        headers: {auth: token}
+    }
+    const excluindoViagem = (id) =>{
+        axios.delete(`${BASE_URL}/trips/${id}`, axiosConfig)
+        .then(()=> alert("Excluiu com sucesso"))
+        .catch(()=> alert("Erro ao excluí viagem"))
     }
 
     const rederizandoNome = listandoNome.map((nome)=>{
         return(
-            <CardContainer onClick={() => detalhes(nome.id)} key={nome.id}>
-               <p>{nome.name}</p> 
+            <CardContainer  key={nome.id}>
+               <p onClick={() => detalhes(nome.id)}>{nome.name}</p> 
               
-               <button>Excluir</button>
+               <button onClick={() => excluindoViagem(nome.id)}>Excluir</button>
             </CardContainer>
         )
     })
 
     return (
         <div>
-            <h1>Aqui é a pagina Admin home, socorro!</h1>
-            {rederizandoNome}
-            <button onClick={voltar}>voltar</button>
+            
+            <CardTrips
+            lista={rederizandoNome}
+            />
+            
+            
         </div>
     )
 }

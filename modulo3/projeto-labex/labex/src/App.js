@@ -18,7 +18,7 @@ function App() {
       <Route  path={"login"} element={<Login/>} />
       <Route  path={"/viagem/Application"} element={<ApplicationFormPage/>}/>
       <Route  exact  path={"/adm/viagem/lista/:id"} element={<TripDetailsPage/>} />
-      {/* <Route  path={"*"} element ={<ErroPage/>}/> */}
+      <Route  path={"*"} element ={<ErroPage/>}/>
     </Routes>
     </BrowserRouter>
   );
