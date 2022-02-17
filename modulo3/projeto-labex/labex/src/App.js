@@ -4,18 +4,21 @@ import HomePage from "./pages/HomePage/HomePage"
 import AdminHomePage from "./pages/AdminHomePage/AdminHomePage"
 import ApplicationFormPage from "./pages/ApplicationFormPage/ApplicationFormPage"
 import ErroPage from "./pages/ErroPage/ErroPage"
+import Login from "./pages/Login/Login"
+import TripDetailsPage from "./pages/TripDetailsPage/TripDetailsPage"
 
 function App() {
-
 
   return (
     <BrowserRouter>
     <Routes>
       <Route  path={"/"} element={<HomePage/>} />
       <Route  path={"viagem"} element={<ListTripsPage/>} />
-      <Route  path={"adm"} element={<AdminHomePage/>} />
+      <Route  path={"/adm/viagem/lista"} element={<AdminHomePage/>} />
+      <Route  path={"login"} element={<Login/>} />
       <Route  path={"/viagem/Application"} element={<ApplicationFormPage/>}/>
-      <Route  path={"*"} element ={<ErroPage/>}/>
+      <Route  exact  path={"/adm/viagem/lista/:id"} element={<TripDetailsPage/>} />
+      {/* <Route  path={"*"} element ={<ErroPage/>}/> */}
     </Routes>
     </BrowserRouter>
   );

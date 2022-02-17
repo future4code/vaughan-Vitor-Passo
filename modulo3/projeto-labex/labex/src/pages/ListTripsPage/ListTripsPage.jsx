@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, } from "react-router-dom"
 import { BASE_URL } from "../../constant/Url"
 import axios from "axios"
 import { CardContainer, ViagemContainer } from "./styled"
@@ -29,19 +29,20 @@ const ListTripsPage = () =>{
 
         .catch((error)=>{
             console.log(error.response)
+            
         })
     }
     
     const mapeandoLista = listaViagem.map((viagem)=>{
         return(
-            <CardContainer>
-            <div key={viagem.id}>
+            <CardContainer key={viagem.id}>
+        
             <p>Nome:{viagem.name}</p>
             <p>Descrição:{viagem.description}</p>
             <p>Planeta:{viagem.planet}</p>
             <p>Duração:{viagem.durationInDays}</p>
             <p>Data:{viagem.date}</p>
-            </div>
+            
             </CardContainer>
         )
     })
