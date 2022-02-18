@@ -11,7 +11,8 @@ import Country from '../../constant/Country';
 const ApplicationFormPage = () =>{
     const navegando = useNavigate();
     const [viagens, setViagens] = useState([]);
-    const {form, onChange, limparCampos} = useForm({
+    const [idViagem, setIdViagem] = useState("")
+    const {form, onChange} = useForm({
         name: "",
         age: "",
         applicationText: "", 
@@ -29,6 +30,7 @@ const ApplicationFormPage = () =>{
         .then((response)=> {
             console.log(response.data)
             setViagens(response.data.trips)
+        
         })
         .catch((error)=> alert("error"))
     }
@@ -36,24 +38,35 @@ const ApplicationFormPage = () =>{
         getTrips()
     }, [setViagens]);
     
-    
-    const InscreverViagem = (event) =>{
+    const aplyToTrip = (event) =>{
         event.preventDefault()
-        console.log(form)
-        limparCampos()
+        axios.post(`${BASE_URL}/trips/${idViagem}/apply`, form)
+        .then((reponse)=>{
+            alert("Inscrição enviada com sucesso")
+           
+        })
+        
+        
+        .catch((error)=>{
+         console.log(error.response)   
+         alert("Erro ao enviar")})
     }
 
+    const pegandoId = (event) =>{
+        setIdViagem(event.target.value)
+    }
 
     return(
         // <form onSubmit={InscreverViagem}>
-        <form onSubmit={InscreverViagem}>
+        <form onSubmit={aplyToTrip}>
             <h1>Aqui é o formulário de inscrever a viagem</h1>
             
             <Tela>
             <FormControl>
-            <Select placeholder="planetas" style={{width: "177px"}}>
+            <Select placeholder="planetas" onChange={pegandoId} style={{width: "177px"}}>
                 {viagens.map((viagem)=>
-                   <option key={viagem.id} value={viagem.id}>{viagem.name}</option>    
+                   <option key={viagem.id}  value={viagem.id}>{viagem.name}</option>  
+
                 )}
                 
                 </Select>
