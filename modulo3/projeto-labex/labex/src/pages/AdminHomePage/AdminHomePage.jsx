@@ -19,8 +19,6 @@ const AdminHomePage = (props) =>{
         navegando(`${id}`)
     }
 
-   
-
     const pegandoListTrips = () =>{
         axios.get(`${BASE_URL}/trips`)
         .then((response)=>{

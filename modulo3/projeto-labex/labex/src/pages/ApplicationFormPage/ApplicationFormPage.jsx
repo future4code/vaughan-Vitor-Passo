@@ -1,115 +1,114 @@
 import { Tela, Botoes } from './styled'
 import { useNavigate } from 'react-router-dom'
-import {  useState, useMemo } from "react"
-import countryList from 'react-select-country-list';
-import Select from "react-select"
-// import axios from 'axios';
-// import { BASE_URL } from "../../constant/Url"
-// import { useEffect } from 'react';
-
+import {  useState} from "react"
+// import {  useState, useMemo } from "react"
+import { FormControl, Select } from '@chakra-ui/react'
+import axios from 'axios';
+import { BASE_URL } from "../../constant/Url"
+import { useEffect } from 'react';
+import useForm from "../../hooks/useForm"
+import Country from '../../constant/Country';
 const ApplicationFormPage = () =>{
     const navegando = useNavigate();
+    const [viagens, setViagens] = useState([]);
+    const {form, onChange, limparCampos} = useForm({
+        name: "",
+        age: "",
+        applicationText: "", 
+        profession: "",
+        country: ""
+
+    })
     
     const voltar = () =>{
         navegando(-1)
     }
 
-    // useEffect(()=>{
-    //     aplicarViagem()
-    // });
+    const getTrips = () =>{
+        axios.get(`${BASE_URL}/trips`)
+        .then((response)=> {
+            console.log(response.data)
+            setViagens(response.data.trips)
+        })
+        .catch((error)=> alert("error"))
+    }
+    useEffect(()=>{
+        getTrips()
+    }, [setViagens]);
     
-    const [value, setValue] = useState("")
-    const options = useMemo(()=> countryList().getData(), [])   
-
-    const [nome, setNome] = useState("")
-    const [idade, setIdade] = useState("")
-    const [candidatura, setCandidatira] = useState("")
-    const [profissao, setProfissao] = useState("")
-   
-    const inputNome = (event) =>{
-        setNome(event.target.value)
-        
-    }
-    const inputIdade = (event) =>{
-        setIdade(event.target.value)
-    }
-    const inputCandidatira = (event) =>{
-        setCandidatira(event.target.value)
-    }
-    const inputProfissao = (event) =>{
-        setProfissao(event.target.value)
+    
+    const InscreverViagem = (event) =>{
+        event.preventDefault()
+        console.log(form)
+        limparCampos()
     }
 
-    const changeHandler = value =>{
-        setValue(value)
-    }
-
-    // const aplicarViagem = () =>{
-    //     const body = {
-    //         name: nome,
-    //         age: idade,
-    //         applicationText: candidatura,
-    //         profession: profissao,
-    //         country: value
-            
-    //     }
-    //     const axiosConfig = {
-    //         headers: {
-    //             id: "NoIFVcOiSgTKTIPVZwXS"
-
-    //         }
-    //     }
-      
-    //     axios.post(`${BASE_URL}/id/apply
-    //     `, body, axiosConfig)
-    //     .then((response)=>{
-    //         console.log("Deu Certo: ", response.data)
-    //     })
-    //     .catch((error)=>{
-    //         console.log(error.response)
-    //     })
-    // }
 
     return(
-        <div>
+        // <form onSubmit={InscreverViagem}>
+        <form onSubmit={InscreverViagem}>
             <h1>Aqui é o formulário de inscrever a viagem</h1>
+            
             <Tela>
+            <FormControl>
+            <Select placeholder="planetas" style={{width: "177px"}}>
+                {viagens.map((viagem)=>
+                   <option key={viagem.id} value={viagem.id}>{viagem.name}</option>    
+                )}
+                
+                </Select>
+             </FormControl>
             <input 
+            name='name'
             placeholder={"nome"}
             type={"text"}
-            value={nome}
-            onChange={inputNome}
+            value={form.name}
+            required
+
+            onChange={onChange}
             />
 
              <input 
+             name='age'
             placeholder={"idade"}
             type={"number"}
-            value={idade}
-            onChange={inputIdade}
+            required
+            value={form.age}
+            onChange={onChange}
             />
 
              <input 
+             name='applicationText'
             placeholder={"texto de candidatura"}
             type={"text"}
-            value={candidatura}
-            onChange={inputCandidatira}
+            required
+            value={form.applicationText}
+            onChange={onChange}
             />
 
             <input 
+            name='profession'
             placeholder={"profissão"}
             type={"text"}
-            value={profissao}
-            onChange={inputProfissao}
+            required
+            value={form.profession}
+            onChange={onChange}
             />
-
-            <Select options={options} value={value} onChange={changeHandler}/>
+            
+            <Country
+            name={"country"}
+             value={form.country}
+            onChange={onChange}
+            required
+        />
+           
             </Tela>
 
             <Botoes>
             <button >cadastrar</button>
             <button onClick={voltar}>voltar</button>
             </Botoes>   
-        </div>
+        </form>
     )
 }
 export default ApplicationFormPage
