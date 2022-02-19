@@ -25,9 +25,13 @@ const TripDetailsPage = () =>{
             axios.put(`${BASE_URL}/trips/${params.id}/candidates/${id}/decide`, body, axiosConfig)
             .then((response)=>{
                 console.log(response.data)
-                alert("Candidato Aprovador")
+                alert("Candidato Aprovado")
+
             })
-            .catch(()=> alert("Candidato Reprovado"))
+            .catch((error)=>{
+                console.log(error.response)
+                detalhesViagem()
+            })
         }
         else{
             const body ={
@@ -37,6 +41,7 @@ const TripDetailsPage = () =>{
             .then((response)=>{
                 console.log(response.data)
                 alert("Canditado Reprovado")
+                detalhesViagem()
             })
             .catch(()=> alert("Canditado Reprovado"))
         

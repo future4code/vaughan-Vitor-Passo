@@ -12,7 +12,7 @@ const ApplicationFormPage = () =>{
     const navegando = useNavigate();
     const [viagens, setViagens] = useState([]);
     const [idViagem, setIdViagem] = useState("")
-    const {form, onChange} = useForm({
+    const {form, onChange, limparCampos} = useForm({
         name: "",
         age: "",
         applicationText: "", 
@@ -22,6 +22,7 @@ const ApplicationFormPage = () =>{
     })
     
     const voltar = () =>{
+       
         navegando(-1)
     }
 
@@ -43,9 +44,8 @@ const ApplicationFormPage = () =>{
         axios.post(`${BASE_URL}/trips/${idViagem}/apply`, form)
         .then((reponse)=>{
             alert("Inscrição enviada com sucesso")
-           
-        })
-        
+            limparCampos()
+        })   
         
         .catch((error)=>{
          console.log(error.response)   
@@ -57,7 +57,9 @@ const ApplicationFormPage = () =>{
     }
 
     return(
+       
         // <form onSubmit={InscreverViagem}>
+        <>
         <form onSubmit={aplyToTrip}>
             <h1>Aqui é o formulário de inscrever a viagem</h1>
             
@@ -119,9 +121,11 @@ const ApplicationFormPage = () =>{
 
             <Botoes>
             <button >cadastrar</button>
-            <button onClick={voltar}>voltar</button>
+           
             </Botoes>   
         </form>
+        <button onClick={voltar}>voltar</button>
+        </>
     )
 }
 export default ApplicationFormPage
