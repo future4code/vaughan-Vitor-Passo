@@ -14,14 +14,13 @@ const CreateTripPage = () => {
     durationInDays: ""
   });
 
-  useEffect(()=>{
-    createTrip()
-  }, [createViagens])
+
 
   const criarViagem = (event) => {
     event.preventDefault();
     limparCampos();
     console.log(form);
+    createTrip()
   };
 
   const token = window.localStorage.getItem("token");

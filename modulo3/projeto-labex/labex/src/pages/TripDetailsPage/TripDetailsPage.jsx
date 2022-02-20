@@ -2,10 +2,12 @@ import { useParams  } from "react-router-dom"
 import { BASE_URL } from "../../constant/Url"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import {CardButton, Butao} from "./styled"
 import CardDatail from "../../components/CardDatail/CardDatail"
 const TripDetailsPage = () =>{
     const params = useParams()
     const [listaDeCandidato, setlistaDeCandidato] = useState([])
+    const [listaDeAprovado, setListaDeAprovado] = useState([])
     const token = window.localStorage.getItem("token")
     const [viagem, setViagem] = useState({})
   
@@ -25,7 +27,9 @@ const TripDetailsPage = () =>{
             axios.put(`${BASE_URL}/trips/${params.id}/candidates/${id}/decide`, body, axiosConfig)
             .then((response)=>{
                 console.log(response.data)
+                
                 alert("Candidato Aprovado")
+                
 
             })
             .catch((error)=>{
@@ -48,14 +52,14 @@ const TripDetailsPage = () =>{
         }
        
     }
-   
-    
+    console.log("Ellen minha vida: " , listaDeAprovado)
     const detalhesViagem = () =>{
         axios.get(`${BASE_URL}/trip/${params.id}`, axiosConfig)
         .then((response)=>{
             
             setViagem(response.data.trip)
             setlistaDeCandidato(response.data.trip.candidates)
+            setListaDeAprovado(response.data.trip.approved)
             console.log(response.data)
             // setCandidatoId(response.data.candidates.id)
                       
@@ -73,12 +77,22 @@ const TripDetailsPage = () =>{
             <p>Idade: {cand.age}</p>
             <p>País: {cand.country}</p>
             <p>Texto de Candidatura: {cand.applicationText}</p>
-            <button onClick={() => decideCandidata(cand.id, true)} >Aprovar</button>
-            <button onClick={() => decideCandidata(cand.id, false)} >Reprovar</button>
+            <CardButton>
+            <Butao onClick={() => decideCandidata(cand.id, true)} >Aprovar</Butao>
+            <Butao onClick={() => decideCandidata(cand.id, false)} >Reprovar</Butao>
+            </CardButton>
             </div>
         )
     })
 
+    const renderizandoListaDeAprovados = listaDeAprovado.map((aprovacao)=>{
+        return(
+            <div key={aprovacao.id}>
+                <li>{aprovacao.name}</li>
+            </div>
+        )
+    })
+    
     return (
         <div>
             <CardDatail
@@ -90,6 +104,7 @@ const TripDetailsPage = () =>{
             planeta={viagem?.planet}
             data={viagem?.date}
             listaDeCandidato={renderizandoLista}
+            nomeAprovado={renderizandoListaDeAprovados}
             />
         </div>
     )

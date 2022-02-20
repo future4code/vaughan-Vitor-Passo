@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom"
-import { CardContainer } from "./styled"
+import { CardContainer, H2, CardInfo, CardCandidato, Butao, H1 } from "./styled"
 const CardDatail = (
     {
     data, descricao,
-    duracao, id, nome, planeta, listaDeCandidato
+    duracao, id, nome, planeta, listaDeCandidato,
+    nomeAprovado
 }) =>{
     const navegando = useNavigate()
     
@@ -12,21 +13,27 @@ const CardDatail = (
         navegando(-1)
     }
 
-   
+
     return(
       
         <CardContainer key={id}>
-            <h1>{nome}</h1>
-            <p>Nome: {nome}</p>
-            <p>Descrição: {descricao}</p>
-            <p>Planeta: {planeta}</p>
-            <p>Duração: {duracao}</p>   
-            <p>Data: {data}</p>
-            <button onClick={voltar}>Voltar</button>
+            <H1>{nome}</H1>
+            <CardInfo>
+            <p><H2>Nome: </H2>{nome}</p>
+            <p><H2>Descrição: </H2> {descricao}</p>
+            <p><H2>Planeta: </H2>{planeta}</p>
+            <p><H2>Duração: </H2>Duração: {duracao}</p>   
+            <p><H2>Data: </H2>{data}</p>
+            </CardInfo>
+            <Butao onClick={voltar}>Voltar</Butao>
+           <CardCandidato>
             <p>{listaDeCandidato}</p>
+            </CardCandidato>
+            <>
+            <ul>{nomeAprovado}</ul>
+            </>
+        
         </CardContainer>
-
-      
 
         
     )

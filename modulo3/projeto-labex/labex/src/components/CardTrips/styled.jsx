@@ -19,7 +19,6 @@ export const H1 = styled.h1`
 
     color: slategray;;
 `
-
 export const Butao = styled.button`
     border-radius: 25px;
     color: white;
