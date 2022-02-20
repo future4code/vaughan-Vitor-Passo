@@ -91,6 +91,7 @@ const ApplicationFormPage = () =>{
             type={"text"}
             value={form.name}
             pattern={"^.{3,}"}
+            title={"É necessário no mínimo 3 letras"}
             required
 
             onChange={onChange}
@@ -108,7 +109,9 @@ const ApplicationFormPage = () =>{
             type={"number"}
             value={form.age}
             onChange={onChange}
+            
             min="18"
+            
             required
             />
 
@@ -123,6 +126,7 @@ const ApplicationFormPage = () =>{
             placeholder={"texto de candidatura"}
             type={"text"}
             pattern={"^.{30,}"}
+            title={"É necessário no mínimo 30 caracteres"}
             required
             value={form.applicationText}
             onChange={onChange}
@@ -140,6 +144,7 @@ const ApplicationFormPage = () =>{
             type={"text"}
             pattern={"^.{10,}"}
             required
+            title={"É necessário no mínimo 10 caracteres"}
             value={form.profession}
             onChange={onChange}
             />

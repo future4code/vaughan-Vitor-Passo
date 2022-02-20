@@ -60,6 +60,8 @@ const CreateTripPage = () => {
           value={form.name}
           onChange={onChange}
           placeholder={"Nome"}
+          pattern={"^.{5,}"}
+          title={"É necessário no mínimo 5 letras"}
           required
           style={{  
             width: "25%",
@@ -73,6 +75,7 @@ const CreateTripPage = () => {
           name="planet"
           value={form.planet}
           placeholder="Planeta"
+          
           required
           style={{
             width: "380px",
@@ -109,6 +112,8 @@ const CreateTripPage = () => {
           value={form.description}
           type={"text"}
           onChange={onChange}
+          pattern={"^.{30,}"}
+          title={"É necessário no mínimo 30 caracteres"}
           required  
           style={{  
             width: "25%",
@@ -122,7 +127,9 @@ const CreateTripPage = () => {
           placeholder="Duração"
           type={"number"}
           value={form.durationInDays}
+          min="50"
           required
+
           onChange={onChange}
           style={{  
             width: "25%",
