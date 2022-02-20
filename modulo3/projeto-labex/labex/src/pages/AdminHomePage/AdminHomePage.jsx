@@ -3,6 +3,7 @@ import { BASE_URL } from "../../constant/Url"
 import { useEffect, useState } from "react"
 import { CardContainer } from "./styled"
 import axios from "axios"
+
 import CardTrips from "../../components/CardTrips/CardTrips"
 const AdminHomePage = (props) =>{
     

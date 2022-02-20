@@ -12,7 +12,7 @@ const CardTrips = (props) =>{
         <CardTripsContainer>
             <H1>Painel Administrativo</H1>
             <ContainerButton>
-            <Butao onClick={voltar}>voltar</Butao>
+            <Butao onClick={voltar}>Voltar</Butao>
             <Butao onClick={criarViagem}>Criar Viagem</Butao>
             <Butao>Logout</Butao>
             </ContainerButton>

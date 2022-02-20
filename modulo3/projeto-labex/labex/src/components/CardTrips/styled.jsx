@@ -7,14 +7,12 @@ export const CardTripsContainer = styled.div`
     margin: 30px;
 
 ` 
-
 export const ContainerButton = styled.div`
     display: flex;
     gap: 2rem;
     margin: 35px;
 
 `
-
 export const H1 = styled.h1`
 
     color: slategray;;

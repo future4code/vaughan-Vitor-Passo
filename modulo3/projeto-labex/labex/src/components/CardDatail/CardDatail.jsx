@@ -7,12 +7,9 @@ const CardDatail = (
     nomeAprovado
 }) =>{
     const navegando = useNavigate()
-    
-
     const voltar = () =>{
         navegando(-1)
     }
-
 
     return(
       
@@ -22,7 +19,7 @@ const CardDatail = (
             <p><H2>Nome: </H2>{nome}</p>
             <p><H2>Descrição: </H2> {descricao}</p>
             <p><H2>Planeta: </H2>{planeta}</p>
-            <p><H2>Duração: </H2>Duração: {duracao}</p>   
+            <p><H2>Duração: </H2> {duracao}</p>   
             <p><H2>Data: </H2>{data}</p>
             </CardInfo>
             <Butao onClick={voltar}>Voltar</Butao>
@@ -34,8 +31,7 @@ const CardDatail = (
             </>
         
         </CardContainer>
-
-        
+      
     )
 }
 export default CardDatail

@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 // import {Butao, TelaLogin, ContainerButtun} from "./styled"
+import {MainContainer, Div, InputContainer, ButtonContainer, StyledInput, StyledButton} from "./styled"
 import { BASE_URL } from "../../constant/Url"
 const Login = () =>{
     const navegando = useNavigate()
@@ -42,26 +43,29 @@ const Login = () =>{
     }
     
     return (
-        <div>
-            
-            <input
+        <Div>
+        <MainContainer>
+        <InputContainer>
+            <StyledInput
             placeholder={"Email"}
             type="email"
             value={email}
             onChange={onChangeEmail}
             />
-            <input
+            <StyledInput
             placeholder={"Senha"}
             type="password"
             value={senha}
             onChange={onChangeSenha}
             />
-            <div>
-            <button onClick={voltar}>voltar</button>
-            <button onClick={login}>Entrar</button>
-            </div>
+            </InputContainer>
+            <ButtonContainer>
+            <StyledButton onClick={voltar}>voltar</StyledButton>
+            <StyledButton onClick={login}>Entrar</StyledButton>
+            </ButtonContainer>
                
-        </div>
+        </MainContainer>
+        </Div>
     )
 }
 export default Login

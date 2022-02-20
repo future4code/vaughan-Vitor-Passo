@@ -2,8 +2,9 @@ import useForm from "../../hooks/useForm";
 import { Select } from "@chakra-ui/react";
 import axios from "axios";
 import { BASE_URL } from "../../constant/Url";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import {Tela, Butao, H1, ContainerButton} from "./styled"
+import { useNavigate } from "react-router-dom";
 const CreateTripPage = () => {
   const [createViagens, setCreateViagens] = useState([])
   const { form, onChange, limparCampos } = useForm({
@@ -14,7 +15,11 @@ const CreateTripPage = () => {
     durationInDays: ""
   });
 
-
+  const navegando = useNavigate()
+  const voltar = () =>{
+       
+    navegando(-1)
+}
 
   const criarViagem = (event) => {
     event.preventDefault();
@@ -43,9 +48,12 @@ const CreateTripPage = () => {
   }
 
   return (
-    <div>
+   
+      <>
       {/* id={"tripId"} */}
       <form onSubmit={criarViagem}>
+      <Tela>
+      <H1>Criar viagem</H1>
         <input
           name="name"
           type={"text"}
@@ -53,7 +61,12 @@ const CreateTripPage = () => {
           onChange={onChange}
           placeholder={"Nome"}
           required
-
+          style={{  
+            width: "25%",
+           padding: "12px 20px",
+           margin: "8px 0",
+           borderRadius: "5px"
+       }}
         />
         <Select
           onChange={onChange}
@@ -61,6 +74,12 @@ const CreateTripPage = () => {
           value={form.planet}
           placeholder="Planeta"
           required
+          style={{
+            width: "380px",
+            padding: "12px 20px",
+            marginLeft: "480px",
+            borderRadius: "5px"
+        }}
         >
           <option value="Mercúrio">Mercúrio</option>
           <option value="Vênus">Vênus</option>
@@ -77,6 +96,12 @@ const CreateTripPage = () => {
           value={form.date}
           onChange={onChange}
           required
+          style={{  
+            width: "25%",
+           padding: "12px 20px",
+           margin: "8px 0",
+           borderRadius: "5px"
+       }}
         />
         <input
           name={"description"}
@@ -84,7 +109,13 @@ const CreateTripPage = () => {
           value={form.description}
           type={"text"}
           onChange={onChange}
-          required    
+          required  
+          style={{  
+            width: "25%",
+           padding: "12px 20px",
+           margin: "8px 0",
+           borderRadius: "5px"
+       }}  
         />
         <input
           name="durationInDays"
@@ -93,10 +124,22 @@ const CreateTripPage = () => {
           value={form.durationInDays}
           required
           onChange={onChange}
+          style={{  
+            width: "25%",
+           padding: "12px 20px",
+           margin: "8px 0",
+           borderRadius: "5px"
+       }}
         />
-        <button type="subimit">Entrar</button>
+        <ContainerButton>
+         <Butao type="subimit">Entrar</Butao>
+         <Butao onClick={voltar}>Voltar</Butao>
+         </ContainerButton>
+        </Tela>
+       
       </form>
-    </div>
+    
+    </>
   );
 };
 export default CreateTripPage;

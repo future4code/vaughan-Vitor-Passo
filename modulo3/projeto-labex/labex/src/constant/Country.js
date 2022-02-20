@@ -1,6 +1,12 @@
 const Country = (props) => {
     return (
       <select name="Country"
+      style={{
+        width: "380px",
+        padding: "12px 20px",
+        margin: "8px 0",
+        borderRadius: "5px"
+    }}
       name={"country"}
       value={props.form}
       onChange={props.onChange}

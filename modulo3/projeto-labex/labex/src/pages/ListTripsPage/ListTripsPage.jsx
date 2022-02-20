@@ -1,7 +1,7 @@
 import { useNavigate, } from "react-router-dom"
 import { BASE_URL } from "../../constant/Url"
 import axios from "axios"
-import { CardContainer, ViagemContainer } from "./styled"
+import { CardContainer, ViagemContainer, Butao, H1, ContainerButton, H2 } from "./styled"
 import { useEffect, useState } from "react"
 const ListTripsPage = () =>{
     const [listaViagem, listaSetViagem] = useState([])
@@ -35,30 +35,29 @@ const ListTripsPage = () =>{
     
     const mapeandoLista = listaViagem.map((viagem)=>{
         return(
+
             <CardContainer key={viagem.id}>
-        
-            <p>Nome:{viagem.name}</p>
-            <p>Descrição:{viagem.description}</p>
-            <p>Planeta:{viagem.planet}</p>
-            <p>Duração:{viagem.durationInDays}</p>
-            <p>Data:{viagem.date}</p>
-            
+            <p> <H2> Nome: </H2> {viagem.name} </p>
+            <p> <H2> Descrição: </H2> {viagem.description} </p>
+            <p> <H2> Planeta: </H2> {viagem.planet} </p>
+            <p> <H2> Duração: </H2> Duração: {viagem.durationInDays} </p>   
+            <p> <H2> Data: </H2> {viagem.date} </p>
             </CardContainer>
         )
     })
 
     return(
-        <div>
-            <div>
-            <button onClick={voltar}>voltar</button>
-            <button onClick={telaInscricao}>Inscreva-se</button>
-            <h1>Lista De Viagens</h1>
-        </div>
         <ViagemContainer>
+            <ContainerButton>
+            <Butao onClick={voltar}>voltar</Butao>
+            <Butao onClick={telaInscricao}>Inscreva-se</Butao>
             
+        </ContainerButton>
+        <H1 >Lista De Viagens</H1>
+        <ViagemContainer>
             {mapeandoLista}
         </ViagemContainer>
-        </div>
+        </ViagemContainer>
     )
 }
 export default ListTripsPage

@@ -1,4 +1,4 @@
-import { Tela, Botoes } from './styled'
+import { Tela, Botoes, H1, Butao } from './styled'
 import { useNavigate } from 'react-router-dom'
 import {  useState} from "react"
 // import {  useState, useMemo } from "react"
@@ -61,23 +61,36 @@ const ApplicationFormPage = () =>{
         // <form onSubmit={InscreverViagem}>
         <>
         <form onSubmit={aplyToTrip}>
-            <h1>Aqui é o formulário de inscrever a viagem</h1>
-            
+               
             <Tela>
+            <H1>Aqui é o formulário de inscrever a viagem</H1>
             <FormControl>
-            <Select placeholder="planetas" onChange={pegandoId} style={{width: "177px"}}>
+            <Select placeholder="planetas" onChange={pegandoId} 
+                style={{
+                    width: "380px",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    borderRadius: "5px"
+                }} >
                 {viagens.map((viagem)=>
                    <option key={viagem.id}  value={viagem.id}>{viagem.name}</option>  
-
-                )}
+               
+               )}
                 
                 </Select>
              </FormControl>
-            <input 
+            <input
+             style={{  
+                 width: "25%",
+                padding: "12px 20px",
+                margin: "8px 0",
+                borderRadius: "5px"
+            }}
             name='name'
             placeholder={"nome"}
             type={"text"}
             value={form.name}
+            pattern={"^.{3,}"}
             required
 
             onChange={onChange}
@@ -85,32 +98,54 @@ const ApplicationFormPage = () =>{
 
              <input 
              name='age'
+             style={{  
+                width: "25%",
+               padding: "12px 20px",
+               margin: "8px 0",
+               borderRadius: "5px"
+           }}
             placeholder={"idade"}
             type={"number"}
-            required
             value={form.age}
             onChange={onChange}
+            min="18"
+            required
             />
 
              <input 
+              style={{  
+                width: "25%",
+               padding: "12px 20px",
+               margin: "8px 0",
+               borderRadius: "5px"
+           }}
              name='applicationText'
             placeholder={"texto de candidatura"}
             type={"text"}
+            pattern={"^.{30,}"}
             required
             value={form.applicationText}
             onChange={onChange}
             />
 
             <input 
+             style={{  
+                width: "25%",
+               padding: "12px 20px",
+               margin: "8px 0",
+               borderRadius: "5px"
+           }}
             name='profession'
             placeholder={"profissão"}
             type={"text"}
+            pattern={"^.{10,}"}
             required
             value={form.profession}
             onChange={onChange}
             />
             
             <Country
+            
             name={"country"}
              value={form.country}
             onChange={onChange}
@@ -118,13 +153,12 @@ const ApplicationFormPage = () =>{
         />
            
             </Tela>
-
             <Botoes>
-            <button >cadastrar</button>
-           
+            <Butao>Enviar</Butao>
+            <Butao onClick={voltar}>voltar</Butao>
             </Botoes>   
         </form>
-        <button onClick={voltar}>voltar</button>
+        
         </>
     )
 }
