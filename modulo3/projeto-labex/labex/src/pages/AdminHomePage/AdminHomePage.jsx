@@ -27,7 +27,7 @@ const AdminHomePage = (props) =>{
             setNome(response.data.trips);
         })
         .catch((error)=>{
-            console.log(error.response);
+            
         })
     }   
     const axiosConfig = {

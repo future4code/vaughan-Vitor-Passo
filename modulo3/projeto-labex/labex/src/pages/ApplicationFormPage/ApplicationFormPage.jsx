@@ -29,7 +29,7 @@ const ApplicationFormPage = () =>{
     const getTrips = () =>{
         axios.get(`${BASE_URL}/trips`)
         .then((response)=> {
-            console.log(response.data)
+        
             setViagens(response.data.trips)
         
         })
@@ -48,7 +48,7 @@ const ApplicationFormPage = () =>{
         })   
         
         .catch((error)=>{
-         console.log(error.response)   
+       
          alert("Erro ao enviar")})
     }
 

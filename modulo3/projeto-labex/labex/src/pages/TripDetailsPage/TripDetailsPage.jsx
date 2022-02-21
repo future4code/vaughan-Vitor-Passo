@@ -26,14 +26,14 @@ const TripDetailsPage = () =>{
             } 
             axios.put(`${BASE_URL}/trips/${params.id}/candidates/${id}/decide`, body, axiosConfig)
             .then((response)=>{
-                console.log(response.data)
+                
                 
                 alert("Candidato Aprovado")
                 
 
             })
             .catch((error)=>{
-                console.log(error.response)
+                
                 detalhesViagem()
             })
         }
@@ -43,7 +43,7 @@ const TripDetailsPage = () =>{
             } 
             axios.put(`${BASE_URL}/trips/${params.id}/candidates/${id}/decide`, body, axiosConfig)
             .then((response)=>{
-                console.log(response.data)
+                
                 alert("Canditado Reprovado")
                 detalhesViagem()
             })
@@ -52,7 +52,7 @@ const TripDetailsPage = () =>{
         }
        
     }
-    console.log("Ellen minha vida: " , listaDeAprovado)
+   
     const detalhesViagem = () =>{
         axios.get(`${BASE_URL}/trip/${params.id}`, axiosConfig)
         .then((response)=>{
@@ -60,12 +60,13 @@ const TripDetailsPage = () =>{
             setViagem(response.data.trip)
             setlistaDeCandidato(response.data.trip.candidates)
             setListaDeAprovado(response.data.trip.approved)
-            console.log(response.data)
+           
             // setCandidatoId(response.data.candidates.id)
                       
         })
         .catch((error)=>{
-            console.log(error.response)
+            
+            alert("Erro ao ver detalhe da viagem")
         })
     }
 

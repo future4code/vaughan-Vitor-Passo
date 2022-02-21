@@ -24,19 +24,19 @@ const Login = () =>{
     }
 
     const login = () => {
-        console.log("before: ", email, senha)
+       
         const body = {
             email: email, 
             password: senha
         }
         axios.post(`${BASE_URL}/login`, body)
         .then((response)=>{
-            console.log(response.data)
+           
             window.localStorage.setItem("token",response.data.token)
             telaAdm()
         })
         .catch((error)=>{
-            console.log(error.response)
+            
             alert("Usuario ou senhas inválido")
         })
         

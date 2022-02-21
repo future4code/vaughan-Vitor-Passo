@@ -24,7 +24,7 @@ const CreateTripPage = () => {
   const criarViagem = (event) => {
     event.preventDefault();
     limparCampos();
-    console.log(form);
+   
     createTrip()
   };
 
@@ -36,14 +36,14 @@ const CreateTripPage = () => {
   const createTrip = () =>{
     axios.post(`${BASE_URL}/trips`, form, axiosConfig)
     .then((response)=>{
-      console.log(response.data)
+      
       setCreateViagens(response.data.trips)
       alert("Sucesso ao Criar Viagem")
     })
     .catch((error)=>{
-      console.log(error.response)
+     
       alert("Erro ao Criar Viagem")
-      console.log(createViagens)
+      
     })
   }
 
