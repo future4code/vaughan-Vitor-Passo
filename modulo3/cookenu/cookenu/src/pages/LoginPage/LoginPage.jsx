@@ -1,51 +1,31 @@
 import React from "react"
-import {ScreenContainer, InputContainer, LoginFormContainer, 
-        SignUpButtonContainer, LogoImage } from "./styled"
+import {ScreenContainer, SignUpButtonContainer, LogoImage } from "./styled"
 import logo from "../../assets/logo (2).jpg"
-import { Button, TextField } from "@material-ui/core"
-import useForm from "../../hooks/useForm"
+import Button from '@mui/material/Button';
+import {useNavigate} from "react-router-dom"
+import LoginForm from "./LoginForm"
+import {goToSignUp} from "../../routes/coordinate"
+import useUnProtectedPage from "../../hooks/useUnProtectedPage";
+
+
 const LoginPage = () =>{
-    const [form, onChange, clear] = useForm({
-        email: "", password: ""
-    })
-    const onSubimitForm = (event) =>{    
-        event.preventDefault()
-        console.log(form)
-        clear()
-    }
+   useUnProtectedPage()
+    const navegando = useNavigate()
     return(
         <ScreenContainer>
             <LogoImage src={logo}/>
-            <InputContainer>
-            <form onSubmit={onSubimitForm}>
-                <TextField
-                  name={"email"}
-                  value={form.email}
-                  onChange={onChange}
-                  label={"E-mail"}
-                  variant={"outlined"}
-                  fullWidth
-                  margin={"normal"}
-                />
-                <TextField
-                  name={"password"}
-                  value={form.password}
-                  onChange={onChange}
-                  label={"Senha"}
-                  variant={"outlined"}
-                  fullWidth
-                  margin={"normal"}
-                />
+            <LoginForm/>
+            <SignUpButtonContainer>
+               
                 <Button
-                fullWidth
-                variant={"contained"}
-                color={"primary"}
+                    onClick={() => goToSignUp(navegando)}
+                    fullWidth
+                    color="primary"
                 >
-                Login
+                    Não possui conta? Cadastre-se
                 </Button>
-            </form>
-            </InputContainer>
-            
+              
+            </SignUpButtonContainer>  
         </ScreenContainer>
     )
 }
