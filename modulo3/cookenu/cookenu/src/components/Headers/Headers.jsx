@@ -1,17 +1,21 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ContainerHeader } from './styled';
 import Button from '@mui/material/Button';
-import  { goToRecipesList, goToLogin } from "../../routes/coordinate"
+// import  { goToRecipesList, goToLogin } from "../../routes/coordinate"
 const Headers = () => {
-    const navegando = useNavigate()
+    // const navegando = useNavigate()
     return (
 
         <AppBar position="static">
             <ContainerHeader>
-                <Button onClick={() => goToRecipesList(navegando)} color="inherit">Cookenu</Button>
-                <Button onClick={() => goToLogin(navegando)} color="inherit">Login</Button>
+                <Link to={"/"}>
+                <Button color="inherit">Cookenu</Button>
+                </Link>
+                <Link to={"/login"}>
+                <Button color="inherit">Login</Button>
+                </Link>
             </ContainerHeader>
         </AppBar>
 

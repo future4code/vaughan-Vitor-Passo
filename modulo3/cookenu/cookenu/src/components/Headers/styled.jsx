@@ -4,4 +4,8 @@ export const ContainerHeader = styled(Toolbar)`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
 `
