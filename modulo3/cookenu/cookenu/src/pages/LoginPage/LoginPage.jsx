@@ -8,13 +8,13 @@ import {goToSignUp} from "../../routes/coordinate"
 import useUnProtectedPage from "../../hooks/useUnProtectedPage";
 
 
-const LoginPage = () =>{
+const LoginPage = ({setRightButtonAction}) =>{
    useUnProtectedPage()
     const navegando = useNavigate()
     return(
         <ScreenContainer>
             <LogoImage src={logo}/>
-            <LoginForm/>
+            <LoginForm setRightButtonAction={setRightButtonAction}/>
             <SignUpButtonContainer>
                
                 <Button

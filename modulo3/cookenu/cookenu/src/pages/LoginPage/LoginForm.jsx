@@ -5,14 +5,14 @@ import TextField from '@mui/material/TextField'
 import useForm from "../../hooks/useForm"
 import { useNavigate } from "react-router-dom"
 import { login } from "../../services/user"
-const LoginForm = () =>{
+const LoginForm = ({setRightButtonAction}) =>{
     const navegando = useNavigate()
     const [form, onChange, clear] = useForm({
         email: "", password: ""
     })
     const onSubimitForm = (event) =>{    
         event.preventDefault()
-        login(form, clear, navegando)
+        login(form, clear, navegando, setRightButtonAction)
         
     }
     return(

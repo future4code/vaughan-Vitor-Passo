@@ -1,18 +1,19 @@
-import { TextField, Button } from "@material-ui/core"
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField'
 import React from "react"
 import useForm from "../../hooks/useForm"
 import { signUp } from "../../services/user"
 import { useNavigate } from "react-router-dom"
 import {InputContainer, ScreenContainer} from "./styled"
 
-const SignUpForm = () =>{
+const SignUpForm = ({setRightButtonAction}) =>{
   const navegando = useNavigate()
     const [form, onChange, clear] = useForm({
         name: "", email: "", password:""
     })
     const SendRegister = (event) =>{
         event.preventDefault()
-        signUp(form, clear, navegando)
+        signUp(form, clear, navegando, setRightButtonAction)
         
         clear()
         
