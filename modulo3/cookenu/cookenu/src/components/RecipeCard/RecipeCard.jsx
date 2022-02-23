@@ -1,8 +1,12 @@
-import { RecipeCardContainer} from './styled'
+import { RecipeCardContainer, CardImg} from './styled'
 const RecipeCard = ({title, img, onClick}) =>{
+    const clickDatil = () =>{
+        console.log("alo")
+    }
     return (
-        <RecipeCardContainer>
+        <RecipeCardContainer onClick={clickDatil}>
         {title}
+        <CardImg src={img}/>
         </RecipeCardContainer>
     )
 }

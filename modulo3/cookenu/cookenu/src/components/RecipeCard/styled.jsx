@@ -8,10 +8,9 @@ export const RecipeCardContainer = styled.div`
          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
          padding: 16px;
          margin: 10px;`;
-
-export const RecipeCardContent = styled.div`display: flex;
-         justify-content: center;
-         align-items: center;`;
-export const CardImg = styled.img`width: 15vh;`;
+         
+export const CardImg = styled.img`
+        width: 100%;
+        `;
 
 
