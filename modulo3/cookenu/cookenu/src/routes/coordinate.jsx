@@ -12,7 +12,7 @@ export const goToAddRecipes = (navegando) =>{
 
 export const goToRecipeDatail = (navegando, id) =>{
     navegando(`/detalhe/${id}`)
-}
+}   
 
 export const goToRecipesList = (navegando) =>{
     navegando("/")

@@ -9,12 +9,13 @@ import { Route, Routes } from "react-router-dom"
 const Router = ({setRightButtonAction}) => {
     return <Routes>
         <Route path="/" element={<RecipesListPage />} />
-        <Route path="login" element={<LoginPage
+        <Route exact path="login" element={<LoginPage
          setRightButtonAction={setRightButtonAction} />} />
-        <Route path="cadastro" element={<SignUpPage 
+        <Route exact path="cadastro" element={<SignUpPage 
         setRightButtonAction={setRightButtonAction} />} />
-        <Route path="detalhe" element={<RecipeDatailPage />} />
-        <Route path="adicionar-receita" element={<AddRecipesPage />} />
+        <Route exact path="/detalhe/:id" element={<RecipeDatailPage />} />
+        <Route path="adicionar-receita" element={<AddRecipesPage 
+        setRightButtonAction={setRightButtonAction} />} />
     </Routes>;
 }
 export default Router

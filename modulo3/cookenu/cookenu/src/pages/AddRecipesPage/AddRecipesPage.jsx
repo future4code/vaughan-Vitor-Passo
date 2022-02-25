@@ -1,12 +1,14 @@
 import React from "react"
-import useProtectedPage from "../../hooks/useProtectedPage"
+import useUnProtectedPage from "../../hooks/useUnProtectedPage"
+import AddRecipeForm from "./AddRecipeForm"
+import { ScreenContainer } from "./styled"
  
-const AddRecipesPage = () =>{
-    useProtectedPage()
+const AddRecipesPage = ({setRightButtonAction}) =>{
+    useUnProtectedPage()
     return(
-        <div>
-            <h1>AddRecipesPage</h1>
-        </div>
+        <ScreenContainer>
+            <AddRecipeForm></AddRecipeForm>
+        </ScreenContainer>
     )
 }
 export default AddRecipesPage

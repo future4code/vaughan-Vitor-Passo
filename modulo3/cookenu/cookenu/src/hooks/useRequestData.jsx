@@ -8,11 +8,11 @@ const useRequestData = (initialData, url) => {
         headers:{Authorization: localStorage.getItem("token") }
       })
       .then(response => {
-        console.log(response.data)
+       
         setData(response.data);
       })
       .catch(error => {
-        console.log(error.response);
+        
         alert("Ocorreu um erro, tente novamente")
       });
   }, [url]);

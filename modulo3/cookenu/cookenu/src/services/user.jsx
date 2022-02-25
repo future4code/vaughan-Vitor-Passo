@@ -25,8 +25,9 @@ export const login = (body, clear, navegando, setRightButtonAction) =>{
       })
       .catch((error)=>{
         alert("Erro ao cadastrar o usuário!")
-        console.log(error.response)
+       
       })
     }
+
 
  

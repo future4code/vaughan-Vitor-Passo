@@ -11,7 +11,7 @@ const SignUpForm = ({setRightButtonAction}) =>{
     const [form, onChange, clear] = useForm({
         name: "", email: "", password:""
     })
-    const SendRegister = (event) =>{
+    const sendRegister = (event) =>{
         event.preventDefault()
         signUp(form, clear, navegando, setRightButtonAction)
         
@@ -20,8 +20,8 @@ const SignUpForm = ({setRightButtonAction}) =>{
     }
     return(
         <ScreenContainer>
-        <InputContainer>
-            <form onSubmit={SendRegister}>
+        <InputContainer>                         
+            <form onSubmit={sendRegister}>
             <TextField
                   name={"name"}
                   value={form.name}
