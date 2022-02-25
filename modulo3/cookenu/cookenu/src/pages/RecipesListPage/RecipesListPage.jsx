@@ -7,12 +7,13 @@ import * as React from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { goToAddRecipes, goToRecipeDatail } from "../../routes/coordinate"
 import { useNavigate } from "react-router-dom"
+import Loading from "../../components/Loading/Loading"
 
 const RecipesListPage = () => {
     useProtectedPage()
     const recipes = useRequestData([], `${BASE_URL}/recipe/feed`)
     const navegando = useNavigate()
-    const clickDatil = (id) =>{
+    const clickDatil = (id) => {
         goToRecipeDatail(navegando, id)
     }
     const renderizandoRecipes = recipes.map((recipe, index) => {
@@ -22,9 +23,9 @@ const RecipesListPage = () => {
                     key={recipe.id}
                     title={recipe?.title}
                     img={recipe?.image}
-                    onClick={() => clickDatil (recipe?.recipe_id) }
+                    onClick={() => clickDatil(recipe?.recipe_id)}
                 />
-               
+
             )
         }
     })
@@ -34,7 +35,7 @@ const RecipesListPage = () => {
                 <AddIcon />
             </CardAddContainer>
             <RecipeContainer>
-                {renderizandoRecipes}
+                {renderizandoRecipes.length > 0 ? renderizandoRecipes : <Loading/>}
             </RecipeContainer>
         </>
     )

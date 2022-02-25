@@ -5,14 +5,17 @@ import TextField from '@mui/material/TextField'
 import useForm from "../../hooks/useForm"
 import { useNavigate } from "react-router-dom"
 import { login } from "../../services/user"
+import CircularProgress from '@mui/material/CircularProgress';
+import { useState } from "react";
 const LoginForm = ({setRightButtonAction}) =>{
     const navegando = useNavigate()
+    const [isLoading, setLoading] = useState(false)
     const [form, onChange, clear] = useForm({
         email: "", password: ""
     })
     const onSubimitForm = (event) =>{    
         event.preventDefault()
-        login(form, clear, navegando, setRightButtonAction)
+        login(form, clear, navegando, setRightButtonAction, setLoading)
         
     }
     return(
@@ -46,7 +49,8 @@ const LoginForm = ({setRightButtonAction}) =>{
                 variant={"contained"}
                 color={"primary"}
                 >
-                Login
+                { isLoading ? <CircularProgress color="inherit" size={24}/> : <>Login!</> }
+                
                 </Button>
             </form>
             </InputContainer>

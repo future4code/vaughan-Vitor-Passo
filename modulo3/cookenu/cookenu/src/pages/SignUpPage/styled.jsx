@@ -13,3 +13,9 @@ export const ScreenContainer = styled.div`
     align-items: center;
     width: 100vw;
 `
+
+export const LogoImage = styled.img`
+    margin: 15px;
+    width: 35vh;
+    max-width: 350px;
+`

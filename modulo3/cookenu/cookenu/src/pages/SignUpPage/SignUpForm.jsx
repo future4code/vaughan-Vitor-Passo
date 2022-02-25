@@ -1,22 +1,20 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField'
-import React from "react"
+import React, { useState } from "react"
 import useForm from "../../hooks/useForm"
 import { signUp } from "../../services/user"
 import { useNavigate } from "react-router-dom"
 import {InputContainer, ScreenContainer} from "./styled"
-
+import CircularProgress from '@mui/material/CircularProgress';
 const SignUpForm = ({setRightButtonAction}) =>{
+  const [isLoading, setLoading] = useState(false)
   const navegando = useNavigate()
     const [form, onChange, clear] = useForm({
         name: "", email: "", password:""
     })
     const sendRegister = (event) =>{
         event.preventDefault()
-        signUp(form, clear, navegando, setRightButtonAction)
-        
-        clear()
-        
+        signUp(form, clear, navegando, setRightButtonAction, setLoading)
     }
     return(
         <ScreenContainer>
@@ -62,7 +60,8 @@ const SignUpForm = ({setRightButtonAction}) =>{
                 variant={"contained"}
                 color={"primary"}
                 >
-                Cadastrar
+                {isLoading ? <CircularProgress color='inherit' size={24} /> :  <>Cadastrar</>} 
+                
                 </Button>
             </form>
             </InputContainer>
