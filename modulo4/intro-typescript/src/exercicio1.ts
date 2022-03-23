@@ -1,5 +1,4 @@
 //1)
-
 const checarTriangulo = (a: number, b:number, c:number) :string=> {
     if(a !== b && b !== c){
         return "Escaleno"
