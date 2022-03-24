@@ -10,7 +10,8 @@
     "exec3": "tsc && node ./build/exercicio3.js",
     "exec4": "tsc && node ./build/exercicio4.js",
     "exec5": "tsc && node ./build/exercicio5.js",
-    "exec6": "tsc && node ./build/exercicio6.js"
+    "exec6": "tsc && node ./build/exercicio6.js",
+    "exec7": "tsc && node ./build/exercicio7.js"
   },
   "keywords": [],
   "author": "",
