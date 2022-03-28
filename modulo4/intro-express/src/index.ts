@@ -78,3 +78,7 @@ app.get("/users", ((req, res)=>{
 app.get("/posts", ((req, res)=>{
     res.status(215).send(post)
 }))
+
+//6 Acredito que seria separada, pois seria mais facil o acesso. Se fosse junto teria
+// que acessar o array de obejtos com as propriedades, sendo uma dela o array de post então seria
+//trabalhoso, no minha perspectiva.
