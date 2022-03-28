@@ -1,3 +1,5 @@
+//npm start no seu terminal para rodar o exercicio 1
+
 const dados = () =>{
     const nome: string = process.argv[2]
     const data: string = process.argv[3]
