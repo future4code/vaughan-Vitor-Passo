@@ -100,5 +100,22 @@ app.get("/posts/:UserId", ((req, res)=>{
     const retornandoId = post.filter((postId)=>{
         return postId.userId === Number(idUser)
     })
-    res.send(retornandoId)
+    res.status(202).send(retornandoId)
+}))
+
+//desafio
+
+app.delete("/posts/:id", ((req, res)=>{
+    const postId = req.params.id
+
+    const deletePost = post.find(post => post.id === postId)
+    if (deletePost) {
+             post = post.filter(post => post.id !== postId)
+        res.status(205).send(deletePost)   
+    }
+    else{
+        console.log(postId)
+        res.status(404).json({menssage: "Post não encontrado"})
+    }
+     
 }))
