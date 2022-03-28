@@ -28,6 +28,23 @@ let usuario: Tipo[] = [
         phone: 999094880,
         email: "vitor@gmail.com",
         website: "asd"
+    },
+    {
+        id: "22", 
+        name: "Cleitin",
+        phone: 4569711,
+        email: "cleitin@gmail.com",
+        website: "cleitin22"
+    },
+    {
+        id: "32", 
+        name: "Iza",
+        phone: 54879,
+        email: "vitor@gmail.com",
+        website: "asd"
     }
 ]
-console.log(usuario)
+
+app.get("/users", ((req, res)=>{
+    res.status(200).send(usuario)
+}))
