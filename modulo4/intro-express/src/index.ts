@@ -42,7 +42,19 @@ let post: Posts[] = [
           "id": 2,
           "title": "qui est esse",
           "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-        }
+        },
+        {
+        "userId": 2,
+        "id": 3,
+        "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+        "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+      },
+      {
+        "userId": 2,
+        "id": 4,
+        "title": "eum et est occaecati",
+        "body": "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
+      }
         
 ]
 
@@ -82,3 +94,11 @@ app.get("/posts", ((req, res)=>{
 //6 Acredito que seria separada, pois seria mais facil o acesso. Se fosse junto teria
 // que acessar o array de obejtos com as propriedades, sendo uma dela o array de post então seria
 //trabalhoso, no minha perspectiva.
+
+app.get("/posts/:UserId", ((req, res)=>{
+    const idUser = req.params.UserId
+    const retornandoId = post.filter((postId)=>{
+        return postId.userId === Number(idUser)
+    })
+    res.send(retornandoId)
+}))
