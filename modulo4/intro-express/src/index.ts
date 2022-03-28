@@ -13,3 +13,21 @@ app.get("/", ((req, res)=>{
 app.listen(3003, ()=>{
     console.log("Back End Rodando na porta 3003")
 })
+
+type Tipo = {
+    id: string,
+    name: string,
+    phone: number,
+    email: string,
+    website: string
+}
+let usuario: Tipo[] = [
+    {
+        id: "12", 
+        name: "Vitor",
+        phone: 999094880,
+        email: "vitor@gmail.com",
+        website: "asd"
+    }
+]
+console.log(usuario)
