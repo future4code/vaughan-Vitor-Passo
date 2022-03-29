@@ -60,6 +60,22 @@ app.get("/toDo", (req, res)=>{
     res.status(201).send(listToDo)
 })
 
+app.post("/createTask", (req, res)=>{
+    const userId = req.body.userId
+    const id = req.body.id
+    const title = req.body.title
+    const completed = req.body.completed
+
+    const newTask = {
+        userId: userId,
+        id: id,
+        title: title,
+        completed: completed
+    }
+    afazeres.push(newTask)
+    res.status(416).send(afazeres)
+})
+
 app.listen(3003, ()=>{
 console.log("Back and Rodando na porta 3003")
 });
