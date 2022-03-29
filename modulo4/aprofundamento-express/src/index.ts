@@ -76,6 +76,21 @@ app.post("/createTask", (req, res)=>{
     res.status(416).send(afazeres)
 })
 
+app.put("/editTask/:id", (req, res)=>{
+    const id = Number(req.params.id)  
+    const editComplited = afazeres.filter((completed)=>{
+        return completed.id === id
+    }).map((complited)=>{
+        return {
+        userId: complited.userId,
+        id: complited.id,
+        title: complited.title,
+        completed: !complited.completed
+        }
+    })
+    res.status(215).send(editComplited)
+})
+
 app.listen(3003, ()=>{
 console.log("Back and Rodando na porta 3003")
 });
