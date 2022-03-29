@@ -23,25 +23,25 @@ const afazeres: ToDo[] =
           "completed": false
         },
         {
-          "userId": 1,
+          "userId": 2,
           "id": 3,
           "title": "fugiat veniam minus",
           "completed": false
         },
         {
-          "userId": 1,
+          "userId": 2,
           "id": 4,
           "title": "et porro tempora",
           "completed": true
         },
         {
-          "userId": 1,
+          "userId": 3,
           "id": 5,
           "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
           "completed": false
         },
         {
-          "userId": 1,
+          "userId": 3,
           "id": 6,
           "title": "qui ullam ratione quibusdam voluptatem quia omnis",
           "completed": false
@@ -90,6 +90,23 @@ app.put("/editTask/:id", (req, res)=>{
     })
     res.status(215).send(editComplited)
 })
+
+app.delete("/deleteTask/:id", (req, res)=>{
+    const id = Number(req.params.id)
+    const deleteTask = afazeres.filter((delet)=>{
+        return delet.id !== id
+    })
+    res.status(207).send(deleteTask)
+})
+
+app.get("/getTask/:userId", (req, res)=>{
+    const userId = req.params.userId
+    const rederizarTaskUser = afazeres.filter((task)=>{
+        return task.userId === Number(userId)
+    })  
+    res.status(206).send(rederizarTaskUser)
+})
+
 
 app.listen(3003, ()=>{
 console.log("Back and Rodando na porta 3003")
