@@ -10,14 +10,19 @@ app.get("/test", (req, res)=>{
     res.send("API funcionando e rodando na porta 3003")
 })
 
+// esse endPoint Cria um novo produto
 app.post("/createProduct", (req, res)=>{
-    
     const addProduct = {
         id: '6',
         name: req.body.name,
         price: req.body.price
     }
     product.push(addProduct)
+    res.status(201).send(product)
+})
+
+// esse endPoint retorna todos os produtos
+app.get("/product", (req, res)=>{
     res.status(201).send(product)
 })
 
