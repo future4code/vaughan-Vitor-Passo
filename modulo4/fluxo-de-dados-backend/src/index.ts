@@ -11,15 +11,15 @@ app.get("/test", (req, res)=>{
 })
 
 // esse endPoint Cria um novo produto
-app.post("/createProduct", (req, res)=>{
-    const addProduct = {
-        id: '6',
-        name: req.body.name,
-        price: req.body.price
-    }
-    product.push(addProduct)
-    res.status(201).send(product)
-})
+// app.post("/createProduct", (req, res)=>{
+//     const addProduct = {
+//         id: '6',
+//         name: req.body.name,
+//         price: req.body.price
+//     }
+//     product.push(addProduct)
+//     res.status(201).send(product)
+// })
 
 // esse endPoint retorna todos os produtos
 app.get("/product", (req, res)=>{
@@ -54,14 +54,26 @@ app.post("/createProduct", (req, res)=>{
         
         let id = Date.now()
         let name = req.body.name
-        let price = req.body.price
+        let price =  req.body.price
+        let typeName = typeof name
+        let typePrice = typeof price
+        
         if(!name || !price){
             throw new Error("Erro um campo não prenchido")
         }
+        else if(typeName !== 'string'){
+            throw new Error("name não é uma string")
+        }
+        else if(typePrice !== "number"){
+            throw new Error("O tipo do preço tem quer number")
+        }
+        else if (price === 0 || price < 0) {
+            throw new Error("O Preço tem que ser positivo")
+        }
         const addProduct = {        
             id: String(id),
-            name: req.body.name,
-            price: req.body.price
+            name: name,
+            price: Number(price)
         }
         product.push(addProduct)
         res.status(201).send(product)
@@ -71,8 +83,16 @@ app.post("/createProduct", (req, res)=>{
             case "Erro um campo não prenchido":
                 res.status(422).send(e.message)
                 break;
-        
+            case "name não é uma string":
+                res.status(400).send(e.message)
+                break
+            case "O tipo do preço tem quer number":
+                res.status(400).send(e.message)
+                break
+            case "O Preço tem que ser positivo":
+                res.status(400).send(e.message)
             default:
+                res.send(500).send(e.message)
                 break;
         }
     }
