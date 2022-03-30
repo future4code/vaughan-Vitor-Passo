@@ -43,6 +43,16 @@ app.put("/editProduct/:idPrice", (req, res)=>{
     res.status(201).send(editPrice)
 })
 
+//esse endPoint é capaz de excluir um produto
+app.delete("/deleteProduct/:idProduct", (req, res)=>{
+    let id = req.params.idProduct
+    const deletandoProduto = product.filter((deleted)=>{
+        return id !== deleted.id
+    })
+    res.status(201).send(deletandoProduto)
+})
+
+
 app.listen(3003, ()=>{
     console.log("Back end rodando na porta 3003")
 })
