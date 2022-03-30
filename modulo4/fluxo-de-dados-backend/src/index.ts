@@ -26,6 +26,23 @@ app.get("/product", (req, res)=>{
     res.status(201).send(product)
 })
 
+// esse endPoint é capaz de editar o preço de um produto
+app.put("/editProduct/:idPrice", (req, res)=>{
+    let newPrice = req.body.price
+    let id = req.params.idPrice
+    const editPrice = product.filter(price=>{
+        return id === price.id
+    }).map(product=>{
+        return {
+            ...product,
+            price: newPrice
+        }
+    })
+    
+    console.log(editPrice)
+    res.status(201).send(editPrice)
+})
+
 app.listen(3003, ()=>{
     console.log("Back end rodando na porta 3003")
 })
