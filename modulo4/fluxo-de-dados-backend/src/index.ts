@@ -30,17 +30,13 @@ app.get("/product", (req, res)=>{
 app.put("/editProduct/:idPrice", (req, res)=>{
     let newPrice = req.body.price
     let id = req.params.idPrice
-    const editPrice = product.filter(price=>{
-        return id === price.id
-    }).map(product=>{
-        return {
-            ...product,
-            price: newPrice
-        }
+     product.forEach(product=>{
+         if(id === product.id){
+            product.price = newPrice
+         }
     })
-    
-    console.log(editPrice)
-    res.status(201).send(editPrice)
+    console.log(product)
+    res.status(201).send(product)
 })
 
 //esse endPoint é capaz de excluir um produto
@@ -52,6 +48,35 @@ app.delete("/deleteProduct/:idProduct", (req, res)=>{
     res.status(201).send(deletandoProduto)
 })
 
+//refatoração do exercicio 3
+app.post("/createProduct", (req, res)=>{
+    try{
+        
+        let id = Date.now()
+        let name = req.body.name
+        let price = req.body.price
+        if(!name || !price){
+            throw new Error("Erro um campo não prenchido")
+        }
+        const addProduct = {        
+            id: String(id),
+            name: req.body.name,
+            price: req.body.price
+        }
+        product.push(addProduct)
+        res.status(201).send(product)
+    }
+    catch(e: any){
+        switch (e.message) {
+            case "Erro um campo não prenchido":
+                res.status(422).send(e.message)
+                break;
+        
+            default:
+                break;
+        }
+    }
+})
 
 app.listen(3003, ()=>{
     console.log("Back end rodando na porta 3003")
