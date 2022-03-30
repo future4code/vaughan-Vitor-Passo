@@ -10,17 +10,6 @@ app.get("/test", (req, res)=>{
     res.send("API funcionando e rodando na porta 3003")
 })
 
-// esse endPoint Cria um novo produto
-// app.post("/createProduct", (req, res)=>{
-//     const addProduct = {
-//         id: '6',
-//         name: req.body.name,
-//         price: req.body.price
-//     }
-//     product.push(addProduct)
-//     res.status(201).send(product)
-// })
-
 // esse endPoint retorna todos os produtos
 app.get("/product", (req, res)=>{
     res.status(201).send(product)
@@ -28,15 +17,20 @@ app.get("/product", (req, res)=>{
 
 // esse endPoint é capaz de editar o preço de um produto
 app.put("/editProduct/:idPrice", (req, res)=>{
-    let newPrice = req.body.price
-    let id = req.params.idPrice
-     product.forEach(product=>{
-         if(id === product.id){
-            product.price = newPrice
-         }
-    })
-    console.log(product)
-    res.status(201).send(product)
+    try {
+        let newPrice = req.body.price
+        let id = req.params.idPrice
+         product.forEach(product=>{
+             if(id === product.id){
+                product.price = newPrice
+             }
+        })
+        
+        res.status(201).send(product)
+        
+    } catch (error) {
+        
+    }
 })
 
 //esse endPoint é capaz de excluir um produto
@@ -48,7 +42,7 @@ app.delete("/deleteProduct/:idProduct", (req, res)=>{
     res.status(201).send(deletandoProduto)
 })
 
-//refatoração do exercicio 3
+// esse endPoint Cria um novo produto
 app.post("/createProduct", (req, res)=>{
     try{
         
@@ -65,7 +59,7 @@ app.post("/createProduct", (req, res)=>{
             throw new Error("name não é uma string")
         }
         else if(typePrice !== "number"){
-            throw new Error("O tipo do preço tem quer number")
+            throw new Error("O tipo do preço tem ser que number")
         }
         else if (price === 0 || price < 0) {
             throw new Error("O Preço tem que ser positivo")
@@ -86,7 +80,7 @@ app.post("/createProduct", (req, res)=>{
             case "name não é uma string":
                 res.status(400).send(e.message)
                 break
-            case "O tipo do preço tem quer number":
+            case "O tipo do preço tem ser que number":
                 res.status(400).send(e.message)
                 break
             case "O Preço tem que ser positivo":
@@ -97,6 +91,8 @@ app.post("/createProduct", (req, res)=>{
         }
     }
 })
+
+
 
 app.listen(3003, ()=>{
     console.log("Back end rodando na porta 3003")
