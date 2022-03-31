@@ -60,11 +60,38 @@ app.put("/editProduct/:idPrice", (req, res)=>{
 
 //esse endPoint é capaz de excluir um produto
 app.delete("/deleteProduct/:idProduct", (req, res)=>{
-    let id = req.params.idProduct
-    const deletandoProduto = product.filter((deleted)=>{
-        return id !== deleted.id
-    })
-    res.status(201).send(deletandoProduto)
+    try{
+        let id = req.params.idProduct
+        product.forEach(product=>{
+            if (product.id !== id) {
+                console.log("deu certo")
+                res.send(product)
+            }
+            else if (product.id !== id) {
+                    throw new Error("O produto a ser editado não foi encontrado")
+                }
+            
+            
+        })
+        
+    }
+    catch(e: any){
+        switch (e.message) {
+            case "O produto a ser editado não foi encontrado":
+                res.status(403).send(e.message)
+                break;
+            case "O produto a ser deletado não foi encontrado":
+                res.status(403).send(e.message)
+            default:
+                res.status(500).send("Algo não esperado aconteceu")
+                break;
+        }
+    }
+    
+    // const deletandoProduto = product.filter((deleted)=>{
+    //     return id !== deleted.id
+    // })
+    // 
 })
 
 // esse endPoint Cria um novo produto
