@@ -33,8 +33,64 @@ app.post("/createAccount", (req, res)=>{
     res.status(201).send(users)
 })
 
+app.put("/addBalance/:idUser", (req, res)=>{
+    try {
+        const id = req.params.idUser
+        const nome = req.query.nome
+        const addBalance =  req.body.balance
+        
+        users.forEach(balance=>{
+            console.log(balance.cpf)
+            if(id === balance.cpf && nome === balance.name){
+                
+                balance.balance = addBalance
+                res.status(201).send(users)
+            }
+            else if(id !== balance.cpf){
+                throw new Error("Erro ao encontrar cliente")
+            }
+            
+        })
+    } catch (e: any) {
+        switch (e.message) {
+            case "Erro ao encontrar cliente":
+                res.status(403).send(e.message)
+                break;
+            
+            default:
+                break;
+        }
+    }
+    
+})
+
 app.get("/users", (req, res)=>{
     res.status(201).send(users)
+})
+
+app.get("getBalance/:id", (req, res)=>{
+    try{
+        const id =  req.params.id
+        const name = req.query.name
+        users.forEach( balance =>{
+            if (id === balance.cpf && name && balance.name) {
+                res.status(201).send(users)
+            }
+            else if (id !== balance.cpf && name !== balance.name) {
+                throw new Error("Erro ao encontrar cliente! Nome ou Cpf inválidos")
+            }
+        })
+
+    }
+    catch(e: any){
+        switch (e.message) {
+            case "Erro ao encontrar cliente! Nome ou Cpf inválidos":
+                res.status(401).send(e.message)
+                break;
+            default:
+                break;
+        }
+    }
 })
 
 app.listen(3003, () =>{

@@ -52,5 +52,5 @@ export const users: Users[] = [
         balance: 80,
         transition: []
     }  
-    
+        
 ]
