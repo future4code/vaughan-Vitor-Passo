@@ -9,7 +9,9 @@ type Users = {
     transition: Transition[]
 } 
 type Transition = {
-    transitionInAccount: any[]
+    balance: number,
+    data: string,
+    desc: string
 }
 const app = express()
 app.use(express.json())
@@ -22,15 +24,48 @@ app.get("/saldo", (req, res)=>{
 })
 
 app.post("/createAccount", (req, res)=>{
-    const createAccount: Users = {
-        name: req.body.name,
-        birth: req.body.birth,
-        cpf: req.body.cpf,
-        balance: 0,
-        transition: []
+    try {
+        const newName = req.body.name
+        let newBirth = req.body.birth
+        const newCpf = req.body.cpf
+        let year:number = Date.now()
+       
+        let date = new Date(newBirth)
+        let newDate = Number(date)
+        let years = 1000*60*60*24*365;
+
+        let novaData = (year - newDate) / years
+
+
+        if (!newName || !newBirth || !newCpf) {
+            throw new Error("Erro campos não preenchidos")
+        }
+        
+        else if(novaData < 18){
+            throw new Error("Infelizmente você é menor de idade e não pode criar uma conta no labeBank!")
+        }
+        
+        const createAccount: Users = {
+            name: newName,
+            birth: newBirth,
+            cpf: newCpf,
+            balance: 0,
+            transition: []
+        }
+        users.push(createAccount)
+        res.status(201).send(users)
+    } catch (e: any) {
+        switch (e.message) {
+            case "Erro campos não preenchidos":
+                res.status(422).send(e.message)
+                break;
+            case "Infelizmente você é menor de idade e não pode criar uma conta no labeBank!":
+                res.status(401).send(e.message)
+            default:
+                res.status(500).send(e.message)
+                break;
+        }
     }
-    users.push(createAccount)
-    res.status(201).send(users)
 })
 
 app.put("/addBalance/:idUser", (req, res)=>{

@@ -1,6 +1,8 @@
 
 type Transition = {
-    transitionInAccount: any[]
+    balance: number,
+    data: string,
+    desc: string
 }
 type Users = {
     name: string,
