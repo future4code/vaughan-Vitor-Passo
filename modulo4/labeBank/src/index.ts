@@ -40,7 +40,7 @@ app.put("/addBalance/:idUser", (req, res)=>{
         const addBalance =  req.body.balance
         
         users.forEach(balance=>{
-            console.log(balance.cpf)
+            
             if(id === balance.cpf && nome === balance.name){
                 
                 balance.balance = addBalance
@@ -68,19 +68,21 @@ app.get("/users", (req, res)=>{
     res.status(201).send(users)
 })
 
-app.get("getBalance/:id", (req, res)=>{
+app.get("/getBalance/:id", (req, res)=>{
     try{
         const id =  req.params.id
-        const name = req.query.name
-        users.forEach( balance =>{
-            if (id === balance.cpf && name && balance.name) {
-                res.status(201).send(users)
-            }
-            else if (id !== balance.cpf && name !== balance.name) {
-                throw new Error("Erro ao encontrar cliente! Nome ou Cpf inválidos")
-            }
+        const nome = req.query.nome
+        if (!id && !nome) {
+            throw new Error("Erro ao encontrar cliente! Nome ou Cpf inválidos")
+        }
+        const showBalance = users.filter( balance =>{
+            return id === balance.cpf && nome === balance.name 
         })
-
+        .map((balance)=>{
+            return balance
+        })
+        res.status(201).send(showBalance)
+        console.log(showBalance)
     }
     catch(e: any){
         switch (e.message) {
