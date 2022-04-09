@@ -7,10 +7,12 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.get('/test', (req, res)=>{
-    res.send("Rodando")
-})
 
+
+// const getId = async (id:string): Promise <void> => {
+    
+//     console.log(result)
+// }
 
 app.post('/createUser' , async(req, res)=>{
     
@@ -27,8 +29,8 @@ app.post('/createUser' , async(req, res)=>{
             const result = await connection('TodoListUser').insert({
                 id, name, nickName, email
             })
-            res.status(201).send(result)
-            console.log(result)
+            res.status(201).send('Usuário cadastrado com sucesso')
+            console.log(result[0])
         }
         
     } catch (e: any) {
@@ -44,7 +46,20 @@ app.post('/createUser' , async(req, res)=>{
     }
 })
 
+app.get('/user',async (req, res)=> {
+    const result = await connection('TodoListUser')
+    console.log(result)
+    res.status(201).send(result)
+})
 
+app.get('/user/:id', async (req, res)=>{
+    const id = req.params.id
+    const result = await connection.raw(`
+        SELECT * FROM TodoListUser WHERE id = "${id}"
+    `)
+    
+    res.status(201).send(result[0][0])
+})
 app.listen(3003, ()=>{
     console.log("Back end rodando na porta 3003")
 })
