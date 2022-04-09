@@ -1,21 +1,20 @@
 import express from 'express'
 import cors from 'cors'
-
+import { v4 as uuidv4 } from 'uuid';
 import connection from './connection'
-
 const app = express()
 app.use(express.json())
 app.use(cors())
 
 // const getId = async (id:string): Promise <void> => {
-    
+    // new Date().toISOString() criar data e hora 
 //     console.log(result)
 // }
 
 app.post('/createUser' , async(req, res)=>{
     
     try {
-        let id = Date.now().toString()
+        let id = uuidv4()
         let name = req.body.name
         let nickName = req.body.nickName
         let email = req.body.email  
@@ -46,17 +45,16 @@ app.post('/createUser' , async(req, res)=>{
 
 app.post('/task', async (req, res): Promise <void> => {
     try {
-        let id = Date.now().toString()
+        let id = uuidv4()
         let title = req.body.title
         let description = req.body.description
-        let status = req.body.status
-        let limit_date = Date.now().toString()
-        let creator_user_id = Date.now().toString()
+        let limit_date = req.body.limit_date
+        let creator_user_id = req.body.creator_user_id
         const result = await connection('task').insert({
-            id, title, description, status, limit_date, creator_user_id
-        })     
-        res.status(201).send(limit_date)
-        console.log(limit_date)
+            id, title, description, limit_date, creator_user_id
+        })
+        res.status(201).send("Task criado com sucesso!")
+        
     } catch (e: any) {
         switch (e.message) {
             case "value":
