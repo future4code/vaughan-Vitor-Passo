@@ -114,6 +114,22 @@ app.get('/user/:id', async (req, res)=>{
         }
     }
 })
+
+
+app.get('/task/:id',async (req, res) :Promise <void> => {
+    try {
+      const id = req.params.id
+      const result = await connection.raw(`
+        SELECT * FROM task WHERE id = "${id}"
+      `)      
+      console.log(result)
+      res.status(201).send(result)
+    } catch (e: any) {
+        
+    }
+})
+
+
 app.listen(3003, ()=>{
     console.log("Back end rodando na porta 3003")
 })
