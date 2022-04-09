@@ -1,13 +1,11 @@
 import express from 'express'
 import cors from 'cors'
-import { nodeModuleNameResolver } from 'typescript'
+
 import connection from './connection'
 
 const app = express()
 app.use(express.json())
 app.use(cors())
-
-
 
 // const getId = async (id:string): Promise <void> => {
     
@@ -41,6 +39,32 @@ app.post('/createUser' , async(req, res)=>{
         
             default:
                 res.status(500).send(e.message)
+                break;
+        }
+    }
+})
+
+app.put('/editUSer/:id', async(req, res): Promise <void> =>{
+    try {
+        let name = req.body.name
+        let nickName = req.body.nickName
+        let email = req.body.email  
+
+        if (!name || !nickName || !email ) {
+            throw new Error("Favor preecha todos os campos!")
+        }
+            await connection('TodoListUser').update({
+                name, nickName, email
+            }).where({id: req.params.id})
+            res.status(201).send({message: "Usuario editado com sucesso!"})
+            
+    } catch (e: any) {
+        switch (e.message) {
+            case "Favor preecha todos os campos!":
+                res.status(422).send(e.message)
+                break;
+            default:
+                res.status(500).send(e.sqlMessage || e.message)
                 break;
         }
     }
