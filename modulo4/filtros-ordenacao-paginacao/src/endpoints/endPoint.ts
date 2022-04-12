@@ -1,6 +1,7 @@
 import { connection } from "../data/connection";
 import { request, Request, Response } from "express"
 
+
 export const getAllUser = async(req: Request, res:Response): Promise <void> =>{
     try {
         const nome = req.query.nome as string
@@ -46,5 +47,20 @@ export const orderUser = async (req: Request, res: Response): Promise <void> => 
         res.status(201).send(result)
     } catch (e:any) {
         res.status(422).send({msg: e.message})
+    }
+}
+
+export const limitUser = async (req: Request, res: Response): Promise<void> => {
+    const numberPage = Number(req.params.num)
+    let quantify = 5
+    let offset = quantify * (numberPage - 1)
+    try {
+        const limit = await connection('aula48_exercicio')
+        .select('*').from('aula48_exercicio')
+        .limit(quantify)
+        .offset(offset)
+        res.status(201).send(limit)
+    } catch (e: any) {
+        res.status(404).send({message: e.message})
     }
 }
