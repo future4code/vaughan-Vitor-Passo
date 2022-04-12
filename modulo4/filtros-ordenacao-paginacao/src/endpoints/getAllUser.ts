@@ -1,5 +1,5 @@
 import { connection } from "../data/connection";
-import { Request, Response } from "express"
+import { request, Request, Response } from "express"
 
 export const getAllUser = async(req: Request, res:Response): Promise <void> =>{
     try {
@@ -17,3 +17,15 @@ export const getAllUser = async(req: Request, res:Response): Promise <void> =>{
         res.status(422).send({msg: e.message})
     }
 } 
+
+export const getUserName = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const name = req.params.name
+        const result = await connection('aula48_exercicio')
+        .select('*')
+        .where('name', 'LIKE', `%${name}%`);
+        res.status(201).send(result)
+    } catch (e:any) {
+        res.status(422).send({msg: e.message})
+    }
+}
