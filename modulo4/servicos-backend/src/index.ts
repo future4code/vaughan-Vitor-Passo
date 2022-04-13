@@ -1,3 +1,5 @@
-import { endereco } from "./services/getAddress";
+import { app } from "./app";
+import { criandoEndereco } from "./services/createAdress";
 
-endereco('58051-811')
+
+app.post('/elbin/gay', criandoEndereco)
