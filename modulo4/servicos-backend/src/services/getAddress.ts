@@ -12,7 +12,7 @@ export const endereco = async (CEP: string):Promise <Endereco | null> => {
             localidade,
             uf
         }
-        console.log(result)
+        
         return newEndereco
     } catch (e) {
         console.error("Erro no serviço getAddress", e)
