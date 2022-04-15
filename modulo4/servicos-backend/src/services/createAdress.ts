@@ -31,8 +31,10 @@ export const criandoEndereco = async (
       to: `${email}`, // list of receivers
       subject: "Endereço Cadastrado Com Sucesso", // Subject line
       text: "Parabéns seu endereço foi criado com sucesso no labefoods", // plain text body
-      html: `<p><strong>Olá, parabéns por se inscrever conosco.</strong> Segue seus dados:
-      ENDEREÇO: ${ress.localidade}/${ress.logradouro} ${ress.bairro} ${ress.uf}</p>`
+      html: `<p><strong>Olá, bezi. Eu te amo e te quero muito</strong> Segue seus dados:
+      ENDEREÇO: ${ress.localidade}/${ress.logradouro} ${ress.bairro} ${ress.uf}</p>
+      Eu te amo minha vida. Fica bemmmm e logo logo to chegando
+      `
     })
     console.log(sendEmail.messageId)
    
