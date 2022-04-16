@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { connection } from "../data/connection";
-const { v4: uuidv4 } = require("uuid");
+import { transporter } from "../data/transporter";
+import { v4 as uuidv4 } from 'uuid';
 
 export const createUser = async (
     req: Request,
@@ -25,9 +26,17 @@ export const createUser = async (
         password
       };
       await connection("labecommerce_users").insert(newUser);
+      const sendInfo = await transporter.sendMail({
+        from: `${process.env.NODEMAILER_USER}`, 
+        to: `${email}`,
+        subject: "Usuário Cadastro Com Sucesso ✔", 
+        text: "Parabéns seu cadastro foi criado com sucesso!", 
+        html: `<p><strong>Olá, ${name}. Seu cadastro no labEcomerce foi realizado com sucesso</strong></p>`,
+      });
       //Nao sei se é a melhor forma, mas achei bonito de ter dois objetos um data e outro message
       res.status(201).send({
-        user: [newUser],
+        user: newUser,
+        info: sendInfo,
         message: "Usuário Cadastrado Com Sucesso"
       });
     } catch (e) {
