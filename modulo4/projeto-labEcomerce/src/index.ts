@@ -1,5 +1,8 @@
 import { app } from "./app";
-import { createProduct, createUser, getAllProduct, getAllUser } from "./endpoints/endpoints";
+import { createProduct } from "./endpoints/createProduct";
+import { createUser } from "./endpoints/createUser";
+import {getAllProduct} from "./endpoints/endpoints";
+import { getAllUser } from "./endpoints/getAllUsers";
 
 app.post('/users', createUser)
 
