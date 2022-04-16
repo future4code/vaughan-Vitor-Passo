@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 export const createProduct = async (req: Request, res: Response) => {
     try {
-      const id = uuidv4();
+      let id = uuidv4();
       const { name, image_url, userId } = req.body;
       const price = Number(req.body.price);
       if (!name && !price && !image_url && !userId) {
@@ -25,7 +25,7 @@ export const createProduct = async (req: Request, res: Response) => {
         image_url,
         userId
       };
-      await connection("labecommerce_product").insert(newProduct);
+      await connection('labecommerce_product').insert(newProduct);
       res.status(201).send(newProduct);
     } catch (e) {
       switch (e.message) {
@@ -39,7 +39,7 @@ export const createProduct = async (req: Request, res: Response) => {
           res.status(422).send({ message: e.message });
           break;
         default:
-          res.status(500).send({ message: e.sqlMessage || e.message });
+          res.status(500).send({ message: e.sqlMessage});
           break;
       }
     }

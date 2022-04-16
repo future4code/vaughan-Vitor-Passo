@@ -15,7 +15,7 @@ export const getAllUser = async (
           break;
   
         default:
-          res.status(500).send({ message: e.sqlMessage || e.message });
+          res.status(500).send({ message: e.sqlMessage});
           break;
       }
     }

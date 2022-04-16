@@ -45,7 +45,7 @@ export const createUser = async (
           res.status(422).send({ message: e.message });
           break;
         default:
-          res.status(500).send({ message: e.sqlMessage || e.message });
+          res.status(500).send({ message: e.sqlMessage});
           break;
       }
     }
