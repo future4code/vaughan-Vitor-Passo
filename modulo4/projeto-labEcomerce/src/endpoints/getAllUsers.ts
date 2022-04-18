@@ -5,9 +5,14 @@ export const getAllUser = async (
     res: Response
   ): Promise<void> => {
     try {
+      let search = req.query.search as string
+      if (!search) {
+        search = '';
+      }
       const result = await connection("labecommerce_users")
         .select("*")
         .from("labecommerce_users");
+        // const rigister = 
       res.status(201).send(result);
     } catch (e) {
       switch (e.message) {
