@@ -7,7 +7,7 @@
 type Transaction = [
     {}
 ]
-class UserAccount {
+export class UserAccount {
     private cpf: string;
     private name: string;
     private age: number;
