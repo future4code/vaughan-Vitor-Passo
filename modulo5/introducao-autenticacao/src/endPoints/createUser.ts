@@ -13,17 +13,24 @@ async function createUser(req: Request,res: Response): Promise<void> {
         res.statusCode = 422;
         throw new Error("Por favor preencha os campos 'nome' e 'password'");
     }
-
-
-    const [user] = await connection("labecommerce_users").where({ email });
+    if(password.length < 6){
+        res.statusCode = 409;
+        throw new Error("A senha deve ter no minimo 6 caractéries");
+    }
     
+    if(email.indexOf('@') === -1){
+        res.statusCode = 401
+        throw new Error("É preciso passar um email no campo email");
+    }
+    
+    const [user] = await connection("usuarios").where({ email });
     if (user) {
       res.statusCode = 409;
       throw new Error("Email já cadastrado");
     }
 
     const newUser: user = { id, email, password };
-    console.log("users", newUser)
+    
     await connection('usuarios').insert(newUser)
     
     const authentication: Authentication = new Authentication();
@@ -36,11 +43,10 @@ async function createUser(req: Request,res: Response): Promise<void> {
     
   } catch (error: any) {
     if (res.statusCode === 200) {
-        // res.status(500).send({ message: "Internal server error" })
-        res.send({ message:  error.sqlMessage })
-     } else {
-        res.send({ message:  error.sqlMessage })
-     }
+        res.status(500).send({ message: "Internal server error" })
+    } else {
+        res.send({ message: error.message || error.sqlMessage })
+    }
   }
 }
 export default createUser
