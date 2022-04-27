@@ -6,7 +6,7 @@ export class HashManager{
         const cypherText: string = hashSync(salt) 
         return cypherText
     }
-    compareHash = (plainText:string, cypherText:string) =>{
+    compareHash = (plainText:string, cypherText:string):boolean =>{
         return compareSync(plainText, cypherText)
     }  
 }

@@ -10,11 +10,11 @@ async function createUser(req: Request, res: Response): Promise<void> {
     const generationId = new IdGeneration();
     const id: string = generationId.generationId();
     const { name, email, password, role } = req.body;
-    if (!email || !password) {
+    if (!name || !email || !password) {
       res.statusCode = 422;
-      throw new Error("Por favor preencha os campos 'nome' e 'password'");
+      throw new Error("Por favor preencha os campos 'name', 'email' e 'password'");
     }
-    const [user] = await connection("labecommerce_users").where({ email });
+    const [user] = await connection("usuarios").where({ email });
     if (user) {
       res.statusCode = 409;
       throw new Error("Email já cadastrado");
@@ -24,7 +24,7 @@ async function createUser(req: Request, res: Response): Promise<void> {
     const newUser: user = { 
         id, name, email, password:cypherPassword, role
     };
-    console.log("users", newUser);
+    
     await connection("usuarios").insert(newUser);
 
     const authentication: Authentication = new Authentication();
