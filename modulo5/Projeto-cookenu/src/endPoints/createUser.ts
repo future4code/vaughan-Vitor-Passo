@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { v4 } from "uuid";
 import { MysqlUsersRepository } from "../repositories/implementations/MysqlUsersRepository";
-import { Authentication } from "../services/Authentication";
-import { authenticationData } from "../types/types";
 
 export class CreateUserController {
   async createUser(req: Request, res: Response): Promise<Response> {
@@ -10,17 +8,20 @@ export class CreateUserController {
       const { name, email, password } = req.body;
       const role: string = req.body.role;
       if (!name || !email || !password) {
+        res.statusCode = 422;
         throw new Error(
           "Por favor, preencha os campos 'name', 'email', 'password' "
         );
       }
       if (email.indexOf("@") === -1) {
+        res.statusCode = 401;
         throw new Error(
           "Por favor, insira o email no formato correto. Verifica-se está com '@'."
         );
       }
 
       if (password.length < 6) {
+        res.statusCode = 401;
         throw new Error(
           "Por favor, insira uma senha com pelo menos 6 caractéries"
         );
@@ -30,6 +31,7 @@ export class CreateUserController {
       const findByEmail = await mysqlUsersRepository.findByEmail(email);
 
       if (findByEmail) {
+        res.statusCode = 401;
         throw new Error("Usuário Já Cadastrado");
       }
       const id = v4();
@@ -37,7 +39,11 @@ export class CreateUserController {
       const token = await mysqlUsersRepository.returnToken(id, role);
       return res.status(201).send({ token: token });
     } catch (error) {
-      res.status(401).send({ message: error.message });
+      if (res.statusCode === 200) {
+        res.status(500).send({ message: error.message });
+      } else {
+        res.send({ message: error.sqlMessage || error.message });
+      }
     }
   }
 }
