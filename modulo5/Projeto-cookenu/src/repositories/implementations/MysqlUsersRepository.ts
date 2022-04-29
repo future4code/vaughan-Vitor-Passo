@@ -7,9 +7,18 @@ export class MysqlUsersRepository implements IUserRepositories {
     const result = await BaseDatabase.connection("usuarios").where({ email });
     return result[0];
   }
-  async save(user: User): Promise<any> {
-    const createUser = await BaseDatabase.connection("usuarios").insert(user);
-    console.log(createUser);
-    return createUser;
+
+  async save(
+    id: string,
+    name: string,
+    email: string,
+    password: string
+  ): Promise<void> {
+    await BaseDatabase.connection("usuarios").insert({
+      id,
+      name,
+      email,
+      password
+    });
   }
 }

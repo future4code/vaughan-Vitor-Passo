@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 export class User {
-  public readonly id: string;
+  id: string;
   name: string;
   email: string;
   password: string;
