@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { MysqlUsersRepository } from "../repositories/implementations/MysqlUsersRepository";
-import { HashManager } from "../services/HashManager";
 
 export class LoginController {
   async login(req: Request, res: Response): Promise<void> {
@@ -12,18 +11,20 @@ export class LoginController {
       }
       const mysqlUsersRepository = new MysqlUsersRepository();
       mysqlUsersRepository.findByEmail(email);
+      const id = (await mysqlUsersRepository.findByEmail(email)).id;
+      const role = (await mysqlUsersRepository.findByEmail(email)).role;
+
       if (!mysqlUsersRepository) {
         res.statusCode = 401;
         throw new Error("Usuário inválido!");
       }
       const comparePassword = await mysqlUsersRepository.compareHash(password);
-      console.log(comparePassword);
-      console.log(password);
       if (!comparePassword) {
+        res.statusCode = 401;
         throw new Error("Senha inválida");
       }
-      const user = await mysqlUsersRepository.returnData();
-      const token = await mysqlUsersRepository.returnToken(user.id);
+
+      const token = await mysqlUsersRepository.returnToken(id, role);
       res.status(200).send({ token: token });
     } catch (error) {
       if (res.statusCode === 200) {

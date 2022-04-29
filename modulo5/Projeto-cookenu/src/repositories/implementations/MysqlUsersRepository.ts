@@ -10,11 +10,12 @@ export class MysqlUsersRepository implements IUserRepositories {
     const [result] = await BaseDatabase.connection("cookenu_user");
     return result;
   }
+  
   async findByEmail(email: string): Promise<User> {
-    const result = await BaseDatabase.connection("cookenu_user").where({
+    const [result] = await BaseDatabase.connection("cookenu_user").where({
       email
     });
-    return result[0];
+    return result;
   }
 
   async save(
@@ -32,6 +33,7 @@ export class MysqlUsersRepository implements IUserRepositories {
       password: cypherPassword
     });
   }
+
   async returnToken(id: string, role?: string): Promise<string> {
     const authentication = new Authentication();
     const payload: authenticationData = {
@@ -41,15 +43,10 @@ export class MysqlUsersRepository implements IUserRepositories {
     const token = authentication.generationToken(payload);
     return token;
   }
+
   async compareHash(password: string): Promise<boolean> {
     const hashManager = new HashManager();
     const [result] = await BaseDatabase.connection("cookenu_user");
-    console.log(result?.password);
-    const comparePassword: boolean = hashManager.compareHash(
-      password,
-      result.password
-    );
-    
-    return comparePassword;
+    return hashManager.compareHash(password, result?.password);
   }
 }

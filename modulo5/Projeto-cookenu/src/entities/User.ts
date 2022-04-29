@@ -4,6 +4,7 @@ export class User {
   name: string;
   email: string;
   password: string;
+  role?: string;
   constructor(props: Omit<User, "id">, id?: string) {
     Object.assign(this, props);
     if (!id) {

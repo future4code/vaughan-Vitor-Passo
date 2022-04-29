@@ -1,9 +1,5 @@
 import { app } from "./app";
-import { CreateUserController } from "./endPoints/createUser";
-import { LoginController } from "./endPoints/login";
+import { login, signup } from "./service";
 
-const createUserController = new CreateUserController();
-const loginController = new LoginController();
-const login = loginController.login;
-app.post("/create/user", createUserController.createUser);
+app.post("/create/user", signup);
 app.post("/login", login);
