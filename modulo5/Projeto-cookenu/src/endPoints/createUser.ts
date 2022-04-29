@@ -40,7 +40,7 @@ export class CreateUserController {
       return res.status(201).send({ token: token });
     } catch (error) {
       if (res.statusCode === 200) {
-        res.status(500).send({ message: error.message });
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
       } else {
         res.send({ message: error.sqlMessage || error.message });
       }

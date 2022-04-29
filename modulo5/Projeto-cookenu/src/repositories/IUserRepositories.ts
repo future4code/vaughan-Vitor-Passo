@@ -1,4 +1,5 @@
 import { User } from "../entities/User";
+import { profile } from "../types/types";
 
 export interface IUserRepositories {
   findByEmail(email: string): Promise<User>;
@@ -11,4 +12,5 @@ export interface IUserRepositories {
   returnToken(id: string, role: string): Promise<string>;
   compareHash(password: string): Promise<boolean>;
   returnData(): Promise<User>;
+  // profile():Promise<profile>
 }

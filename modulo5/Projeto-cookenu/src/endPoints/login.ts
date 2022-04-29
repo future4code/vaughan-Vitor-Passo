@@ -30,7 +30,7 @@ export class LoginController {
       if (res.statusCode === 200) {
         res.status(500).send({ message: "Erro ao se conectar ao servidor!" });
       } else {
-        res.send({ message: error.message });
+        res.send({ message: error.sqlMessage || error.message });
       }
     }
   }

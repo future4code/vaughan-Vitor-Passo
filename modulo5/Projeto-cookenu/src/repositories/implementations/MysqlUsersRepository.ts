@@ -2,15 +2,19 @@ import { BaseDatabase } from "../../data/BaseDatabase";
 import { User } from "../../entities/User";
 import { Authentication } from "../../services/Authentication";
 import { HashManager } from "../../services/HashManager";
-import { authenticationData } from "../../types/types";
+import { authenticationData, profile } from "../../types/types";
 import { IUserRepositories } from "../IUserRepositories";
 
 export class MysqlUsersRepository implements IUserRepositories {
+  // profile(): Promise<profile> {
+  //   throw new Error("Method not implemented.");
+  // }
+
   async returnData(): Promise<User> {
     const [result] = await BaseDatabase.connection("cookenu_user");
     return result;
   }
-  
+
   async findByEmail(email: string): Promise<User> {
     const [result] = await BaseDatabase.connection("cookenu_user").where({
       email
