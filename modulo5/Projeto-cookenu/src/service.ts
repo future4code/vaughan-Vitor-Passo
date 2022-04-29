@@ -1,5 +1,5 @@
-import { CreateUserController } from "./endPoints/createUser";
-import { LoginController } from "./endPoints/login";
+import { CreateUserController } from "./endPoints/CreateUserController";
+import { LoginController } from "./endPoints/LoginController";
 import getProfile from "./endPoints/profile";
 
 const createUserController = new CreateUserController();
