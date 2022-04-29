@@ -9,4 +9,6 @@ export interface IUserRepositories {
     password: string
   ): Promise<void>;
   returnToken(id: string, role: string): Promise<string>;
+  compareHash(password: string): Promise<boolean>;
+  returnData(): Promise<User>;
 }
