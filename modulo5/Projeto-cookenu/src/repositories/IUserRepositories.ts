@@ -8,4 +8,5 @@ export interface IUserRepositories {
     email: string,
     password: string
   ): Promise<void>;
+  returnToken(id: string, role: string): Promise<string>;
 }
