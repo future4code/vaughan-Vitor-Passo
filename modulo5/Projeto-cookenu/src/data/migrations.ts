@@ -28,7 +28,7 @@ const createRecipe = () =>
   title VARCHAR(255) NOT NULL,
   description TEXT(1023),
   creationDate DATETIME NOT NULL,
-  user_id VARCHAR(255),
+  user_id VARCHAR(255) NOT NULL,
   FOREIGN KEY(user_id) REFERENCES cookenu_user(id) 
 );`
     )
