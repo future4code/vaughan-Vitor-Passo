@@ -8,8 +8,8 @@ import { IUserRepositories } from "../IUserRepositories";
 
 export class MysqlUsersRepository implements IUserRepositories {
   
-  async returnData(): Promise<User> {
-    const [result] = await BaseDatabase.connection("cookenu_user");
+  async returnData(id: string): Promise<User> {
+    const [result] = await BaseDatabase.connection("cookenu_user").where({id});
     return result;
   }
 

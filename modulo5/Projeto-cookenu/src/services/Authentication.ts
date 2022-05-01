@@ -10,7 +10,10 @@ export class Authentication {
   };
   getTokenData = (token: string) => {
     try {
-      const dataToken = jwt.verify(token, process.env.JWT as string) as string;
+      const dataToken = jwt.verify(
+        token,
+        process.env.JWT as string
+      ) as authenticationData;
       return dataToken;
     } catch (error) {
       console.log(error);

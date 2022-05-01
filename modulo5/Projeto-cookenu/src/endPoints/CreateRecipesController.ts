@@ -10,13 +10,15 @@ export class CreteRecipesController {
         res.statusCode = 401;
         throw new Error("É necessário passar o token");
       }
-      const { title, description, creationDate, user_id } = req.body;
-      if (!title || !description || !creationDate || !user_id) {
+      const { title, description, user_id } = req.body;
+      if (!title || !description || !user_id) {
         res.statusCode = 401;
         throw new Error(
-          "Os campos 'title', 'description' e 'creationDate' precisam ser preenchidos"
+          "Os campos 'title', 'description' e precisam ser preenchidos"
         );
       }
+
+      const creationDate = new Date();
       const getId = new Uuid();
       const id = getId.gerationId();
       const recipes = {

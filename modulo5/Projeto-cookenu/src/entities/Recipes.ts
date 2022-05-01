@@ -3,7 +3,7 @@ export class Recipes {
     readonly id: string,
     readonly title: string,
     readonly description: string,
-    readonly creationDate: Date = new Date()
+    readonly creationDate: Date
   ) {
     if (typeof id !== "string")
       throw new Error("O type do 'id' tem que ser do tipo 'string' ");
