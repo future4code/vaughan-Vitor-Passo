@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { MysqlUsersRepository } from "../repositories/implementations/MysqlUsersRepository";
+import { Authentication } from "../services/Authentication";
 import { Uuid } from "../services/Id";
 
 export class CreteRecipesController {
@@ -10,14 +11,19 @@ export class CreteRecipesController {
         res.statusCode = 401;
         throw new Error("É necessário passar o token");
       }
-      const { title, description, user_id } = req.body;
-      if (!title || !description || !user_id) {
+      const getTokenData = new Authentication();
+      const tokenData = getTokenData.getTokenData(token);
+      if (!tokenData) {
+        res.statusCode = 401;
+        throw new Error("Usuário deslogado!");
+      }
+      const { title, description } = req.body;
+      if (!title || !description) {
         res.statusCode = 401;
         throw new Error(
-          "Os campos 'title', 'description' e precisam ser preenchidos"
+          "Os campos 'title', 'description' precisam ser preenchidos"
         );
       }
-
       const creationDate = new Date();
       const getId = new Uuid();
       const id = getId.gerationId();
@@ -26,7 +32,7 @@ export class CreteRecipesController {
         title,
         description,
         creationDate,
-        user_id
+        user_id: tokenData.id
       };
       const mysqlUsersRepository = new MysqlUsersRepository();
       await mysqlUsersRepository.createRicipes(recipes);

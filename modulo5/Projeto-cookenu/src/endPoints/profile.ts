@@ -28,9 +28,9 @@ async function getProfile(req: Request, res: Response): Promise<profile> {
     return profile;
   } catch (error) {
     if (res.statusCode === 200) {
-      res.send({ message: error.sqlMessage || error.message });
       res.status(500).send({ message: "Erro ao se conectar com o servidor" });
     } else {
+      res.send({ message: error.sqlMessage || error.message });
     }
   }
 }

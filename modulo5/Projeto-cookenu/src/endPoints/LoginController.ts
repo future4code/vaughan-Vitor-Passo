@@ -19,6 +19,7 @@ export class LoginController {
         throw new Error("Usuário inválido!");
       }
       const comparePassword = await mysqlUsersRepository.compareHash(password);
+      console.log();
       if (!comparePassword) {
         res.statusCode = 401;
         throw new Error("Senha inválida");

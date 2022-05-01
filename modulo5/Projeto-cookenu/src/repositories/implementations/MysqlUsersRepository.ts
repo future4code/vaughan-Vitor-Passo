@@ -7,9 +7,16 @@ import { authenticationData, profile } from "../../types/types";
 import { IUserRepositories } from "../IUserRepositories";
 
 export class MysqlUsersRepository implements IUserRepositories {
-  
+  async returnProfile(id: string): Promise<User> {
+    const [result] = await BaseDatabase.connection("cookenu_user").where({
+      id
+    });
+    return result;
+  }
   async returnData(id: string): Promise<User> {
-    const [result] = await BaseDatabase.connection("cookenu_user").where({id});
+    const [result] = await BaseDatabase.connection("cookenu_user").where({
+      id
+    });
     return result;
   }
 
@@ -49,12 +56,11 @@ export class MysqlUsersRepository implements IUserRepositories {
   async compareHash(password: string): Promise<boolean> {
     const hashManager = new HashManager();
     const [result] = await BaseDatabase.connection("cookenu_user");
-    return hashManager.compareHash(password, result?.password);
+    console.log(password, result.password);
+    return hashManager.compareHash(password, result.password);
   }
 
   async createRicipes(recipes: Recipes): Promise<void> {
-    await BaseDatabase.connection("cookenu_recipes").insert(recipes)
+    await BaseDatabase.connection("cookenu_recipes").insert(recipes);
   }
-  
 }
-

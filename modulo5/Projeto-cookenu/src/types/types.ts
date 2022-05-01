@@ -4,5 +4,6 @@ export type authenticationData = {
 };
 export type profile = {
   id: string;
+  name: string;
   email: string;
 };

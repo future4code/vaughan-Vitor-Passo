@@ -12,5 +12,6 @@ export interface IUserRepositories {
   returnToken(id: string, role: string): Promise<string>;
   compareHash(password: string): Promise<boolean>;
   returnData(token: string): Promise<User>;
+  returnProfile(id: string): Promise<User>;
   createRicipes(recipes: Recipes): Promise<void>;
 }
