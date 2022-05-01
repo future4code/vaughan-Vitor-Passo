@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { v4 } from "uuid";
 import { MysqlUsersRepository } from "../repositories/implementations/MysqlUsersRepository";
+import { Uuid } from "../services/Id";
 
 export class CreateUserController {
   async createUser(req: Request, res: Response): Promise<Response> {
@@ -34,7 +34,8 @@ export class CreateUserController {
         res.statusCode = 401;
         throw new Error("Usuário Já Cadastrado");
       }
-      const id = v4();
+      const getId = new Uuid();
+      const id = getId.gerationId();
       mysqlUsersRepository.save(id, name, email, password);
       const token = await mysqlUsersRepository.returnToken(id, role);
       return res.status(201).send({ token: token });

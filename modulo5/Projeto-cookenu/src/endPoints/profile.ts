@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { BaseDatabase } from "../data/BaseDatabase";
 import { MysqlUsersRepository } from "../repositories/implementations/MysqlUsersRepository";
 import { profile } from "../types/types";
 

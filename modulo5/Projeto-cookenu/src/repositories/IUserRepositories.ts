@@ -1,3 +1,4 @@
+import { Recipes } from "../entities/Recipes";
 import { User } from "../entities/User";
 
 export interface IUserRepositories {
@@ -11,5 +12,5 @@ export interface IUserRepositories {
   returnToken(id: string, role: string): Promise<string>;
   compareHash(password: string): Promise<boolean>;
   returnData(): Promise<User>;
-  createRicipes(): Promise<void>;
+  createRicipes(recipes: Recipes): Promise<void>;
 }

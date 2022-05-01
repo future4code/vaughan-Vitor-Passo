@@ -1,4 +1,5 @@
 import { BaseDatabase } from "../../data/BaseDatabase";
+import { Recipes } from "../../entities/Recipes";
 import { User } from "../../entities/User";
 import { Authentication } from "../../services/Authentication";
 import { HashManager } from "../../services/HashManager";
@@ -51,8 +52,9 @@ export class MysqlUsersRepository implements IUserRepositories {
     return hashManager.compareHash(password, result?.password);
   }
 
-  createRicipes(): Promise<void> {
-    throw new Error("Method not implemented.");
+  async createRicipes(recipes: Recipes): Promise<void> {
+    await BaseDatabase.connection("cookenu_recipes").insert(recipes)
   }
   
 }
+
