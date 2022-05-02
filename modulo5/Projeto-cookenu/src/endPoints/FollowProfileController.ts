@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
-import { BaseDatabase } from "../data/BaseDatabase";
 import { MysqlUsersRepository } from "../repositories/implementations/MysqlUsersRepository";
 import { Authentication } from "../services/Authentication";
-import { Uuid } from "../services/Id";
-import { profile } from "../types/types";
 
 export class FollowProfilleController {
   async followUser(req: Request, res: Response): Promise<void> {
@@ -25,14 +22,13 @@ export class FollowProfilleController {
         res.statusCode = 401;
         throw new Error("Usuário Deslogado!");
       }
-      const followUser = await mysqlUsersRepository.returnFollowUser(user_id);
-      console.log(followUser);
+      await mysqlUsersRepository.returnFollowUser(user_id);
       res.status(201).send({ message: "Followed successfully" });
     } catch (error) {
       if (res.statusCode === 200) {
-        res.send({ message: error.sqlMessage || error.message });
-      } else {
         res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      } else {
+        res.send({ message: error.sqlMessage || error.message });
       }
     }
   }

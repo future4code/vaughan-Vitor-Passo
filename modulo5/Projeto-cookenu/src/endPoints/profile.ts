@@ -13,7 +13,6 @@ async function getProfile(req: Request, res: Response): Promise<profile> {
     const mysqlUsersRepository = new MysqlUsersRepository();
     const authentication = new Authentication();
     const tokenData = authentication.getTokenData(token);
-    console.log(tokenData);
     if (!tokenData) {
       res.statusCode = 401;
       throw new Error("Usuário deslogado");
