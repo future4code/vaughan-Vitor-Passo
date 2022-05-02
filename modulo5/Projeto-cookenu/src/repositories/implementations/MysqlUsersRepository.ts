@@ -3,10 +3,22 @@ import { Recipes } from "../../entities/Recipes";
 import { User } from "../../entities/User";
 import { Authentication } from "../../services/Authentication";
 import { HashManager } from "../../services/HashManager";
+import { Uuid } from "../../services/Id";
 import { authenticationData, profile } from "../../types/types";
 import { IUserRepositories } from "../IUserRepositories";
 
 export class MysqlUsersRepository implements IUserRepositories {
+  async returnFollowUser(user_id: string): Promise<void> {
+    const generationId = new Uuid();
+    const id = generationId.gerationId;
+
+    const followUser = await BaseDatabase.connection("cookenu_follow").insert({
+      id,
+      user_id
+    });
+    console.log(followUser);
+    console.log(user_id);
+  }
   async returnProfile(id: string): Promise<User> {
     const [result] = await BaseDatabase.connection("cookenu_user").where({
       id
@@ -56,7 +68,6 @@ export class MysqlUsersRepository implements IUserRepositories {
   async compareHash(password: string): Promise<boolean> {
     const hashManager = new HashManager();
     const [result] = await BaseDatabase.connection("cookenu_user");
-    console.log(password, result.password);
     return hashManager.compareHash(password, result.password);
   }
 

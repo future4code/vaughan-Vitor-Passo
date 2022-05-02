@@ -9,7 +9,7 @@ export class CreteRecipesController {
       const token = req.headers.authorization as string;
       if (!token) {
         res.statusCode = 401;
-        throw new Error("É necessário passar o token");
+        throw new Error("É necessário passar o token de acesso");
       }
       const getTokenData = new Authentication();
       const tokenData = getTokenData.getTokenData(token);
