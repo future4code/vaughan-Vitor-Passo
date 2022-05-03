@@ -1,4 +1,4 @@
-import { user } from "../types/users";
+import { authenticationData, user } from "../types/users";
 import { BaseDataBase } from "./BaseDatabase";
 
 export class UserDataBase extends BaseDataBase {
@@ -24,6 +24,6 @@ export class UserDataBase extends BaseDataBase {
     return users;
   };
   deleteUser = async (id: string) => {
-    await this.connection("usuarios").delete().where({ id });
+    await this.connection("usuarios").delete("*").where({ id });
   };
 }

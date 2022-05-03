@@ -70,4 +70,24 @@ export class UserBusiness {
     const returnUsers = await userDb.returnAllUser();
     return returnUsers;
   };
+
+  removeUser = async (id: string, token: string) => {
+    if (!id) {
+      throw new Error("É necessário passar o id da pessoa que deseja excluir");
+    }
+    if (!token) {
+      throw new Error("É nescessário passar um token de acesso");
+    }
+
+    const authentication = new Authenticator();
+    const tokenData = authentication.getTokenData(token);
+
+    if (tokenData.role !== "ADMIN") {
+      throw new Error("Você não tem permissão para apagar um usuário");
+    }
+    if (!tokenData) {
+      throw new Error("Usuário deslogado");
+    }
+    await userDb.deleteUser(id);
+  };
 }

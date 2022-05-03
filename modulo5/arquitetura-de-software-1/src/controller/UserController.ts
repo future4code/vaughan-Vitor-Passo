@@ -34,9 +34,23 @@ export class UserControlle {
     try {
       const token = req.headers.authorization;
       const users = await userBusiness.getAllUser(token);
-      console.log(users);
       res.status(200).send(users);
       return users;
+    } catch (error) {
+      if (res.statusCode === 200) {
+        res.send({ message: error.sqlMessage || error.message });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      }
+    }
+  };
+
+  deleteUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const id = req.params.id;
+      const token = req.headers.authorization;
+      await userBusiness.removeUser(id, token);
+      res.send({ message: "Usuário excluído com sucesso" });
     } catch (error) {
       if (res.statusCode === 200) {
         res.send({ message: error.sqlMessage || error.message });
