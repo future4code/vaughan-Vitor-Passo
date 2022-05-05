@@ -29,17 +29,19 @@ export class PostBusiness {
     if (!tokenData) {
       throw new Error("Usuário deslogado!");
     }
+    const { id } = tokenData;
+
     const time = new Date();
-    const id = this.idGeneration.generationId();
+    const post_id = this.idGeneration.generationId();
     const addPostInDataBase: Post = {
-      id,
+      id: post_id,
       photo,
       time: time,
       description,
       type,
-      user_id: "23449ace-8d6c-414e-b1d1-5508265ead95"
+      user_id: id
     };
-    console.log(addPostInDataBase);
+
     await this.postData.insertPost(addPostInDataBase);
   };
 }
