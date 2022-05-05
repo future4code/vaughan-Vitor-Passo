@@ -5,7 +5,12 @@ import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGeneration } from "../services/IdGeneration";
 import { authenticationData } from "../types/authenticationData";
-import { loginDTO, signupDto } from "../types/DTO";
+import {
+  followUserDTO,
+  followUserInfo,
+  loginDTO,
+  signupDto
+} from "../types/DTO";
 
 export class UserBusiness {
   private userData: IUserData;
@@ -65,4 +70,35 @@ export class UserBusiness {
     const token = this.authenticator.generationToken(payload);
     return token;
   };
+  doingNewFrind = async (followInfos: followUserInfo): Promise<void> => {
+    const { id, token } = followInfos;
+    if (!id) {
+      throw new Error(
+        "É necessário passar um id de quem você deseja fazer uma amizade"
+      );
+    }
+    if (!token) {
+      throw new Error("É necessário informar o token de acesso!");
+    }
+
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) {
+      throw new Error("Usuário deslogado");
+    }
+    if (id === tokenData.id) {
+      throw new Error("Não é possível fazer amizade consigo");
+    }
+    const isVerifyId: boolean = await this.userData.findFollowId(id);
+
+    if (isVerifyId) {
+      throw new Error("Você já segue esse usuário");
+    }
+    const following: followUserDTO = {
+      user_id: tokenData.id,
+      friend_id: id
+    };
+    this.userData.insertNewFriend(following);
+  };
+
+  removeFriend = async (followInfos: followUserInfo) => {};
 }
