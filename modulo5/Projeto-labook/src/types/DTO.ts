@@ -1,3 +1,5 @@
+import { types } from "./ENUM";
+
 export type signupDto = {
   name: string;
   email: string;
@@ -7,4 +9,11 @@ export type signupDto = {
 export type loginDTO = {
   email: string;
   password: string;
+};
+
+export type postDTO = {
+  photo: string;
+  description: string;
+  type: types;
+  token: string;
 };
