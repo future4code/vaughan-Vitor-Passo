@@ -17,3 +17,8 @@ export type postDTO = {
   type: types;
   token: string;
 };
+
+// export type crendential = {
+//   id: string;
+//   token: string;
+// };

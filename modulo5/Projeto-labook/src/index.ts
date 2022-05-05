@@ -11,8 +11,10 @@ const userBusiness = new UserBusiness(userDataBase);
 
 const userController = new UserController(userBusiness);
 const postData = new PostDataBase();
-const tes = new PostBusiness(postData);
-const postController = new PostController(tes);
+const postBusiness = new PostBusiness(postData);
+const postController = new PostController(postBusiness);
 app.post("/users/signup", userController.signup);
 app.post("/users/login", userController.login);
 app.post("/post", postController.createPost);
+
+app.get("/post/:id", postController.getPostById);

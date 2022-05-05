@@ -44,4 +44,20 @@ export class PostBusiness {
 
     await this.postData.insertPost(addPostInDataBase);
   };
+
+  returnPost = async (id: string, token: string): Promise<Post> => {
+    if (!id) {
+      throw new Error("É necessário passar o id do post");
+    }
+    if (!token) {
+      throw new Error("É necessário passar o token de acesso");
+    }
+    const tokenData = await this.authenticator.getTokenData(token);
+
+    if (!tokenData) {
+      throw new Error("Usuário deslogado");
+    }
+    const post = await this.postData.findPostById(id);
+    return post;
+  };
 }

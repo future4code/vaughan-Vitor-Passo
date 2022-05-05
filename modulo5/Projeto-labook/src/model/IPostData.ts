@@ -1,6 +1,6 @@
 import { Post } from "./Post";
 
 export interface IPostData {
-  // findUserByEmail(email: string): Promise<User>;
+  findPostById(id: string): Promise<Post>;
   insertPost(post: Post): void;
 }
