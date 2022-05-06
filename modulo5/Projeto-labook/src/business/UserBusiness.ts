@@ -1,5 +1,6 @@
 import { UserDataBase } from "../data/UserDataBase";
 import { IUserData } from "../model/IUserData";
+import { Post } from "../model/Post";
 import { User } from "../model/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
@@ -100,5 +101,42 @@ export class UserBusiness {
     this.userData.insertNewFriend(following);
   };
 
-  removeFriend = async (followInfos: followUserInfo) => {};
+  removeFriend = async (followInfos: followUserInfo) => {
+    const { id, token } = followInfos;
+    if (!id) {
+      throw new Error(
+        "É necessário passar um id de quem você deseja desfazer uma amizade"
+      );
+    }
+    if (!token) {
+      throw new Error("É necessário informar o token de acesso!");
+    }
+
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) {
+      throw new Error("Usuário deslogado");
+    }
+    const isVerifyId = await this.userData.findFollowId(id);
+
+    if (!isVerifyId) {
+      throw new Error("Esse id não existe na sua lista de amigos");
+    }
+
+    await this.userData.removeFollow(id);
+  };
+
+  listOfPosts = async (token: string): Promise<Post[]> => {
+    if (!token) {
+      throw new Error("É necessário passar o token de acesso");
+    }
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) {
+      throw new Error("Usuário deslogado");
+    }
+    const sendInfoToReturPosts = {
+      friend_id: tokenData.id
+    };
+    const getInfoData = await this.userData.returnPosts(tokenData.id);
+    return getInfoData;
+  };
 }

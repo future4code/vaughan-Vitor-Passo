@@ -1,9 +1,19 @@
 import { IUserData } from "../model/IUserData";
+import { Post } from "../model/Post";
 import { User } from "../model/User";
 import { followUserDTO } from "../types/DTO";
 import { BaseDataBase } from "./BaseDataBase";
 
 export class UserDataBase extends BaseDataBase implements IUserData {
+  returnPosts(friend_id: string): Promise<Post[]> {
+    throw new Error("Method not implemented.");
+  }
+  async removeFollow(friend_id: string): Promise<void> {
+    const tableName = "labebook_friends";
+    const searchFollow = await this.connection(tableName).delete().where({
+      friend_id
+    });
+  }
   async findFollowId(friend_id: string): Promise<boolean> {
     const tableName = "labebook_friends";
     const [searchFollow] = await this.connection(tableName).where({

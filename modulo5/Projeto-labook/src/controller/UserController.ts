@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
+import { Post } from "../model/Post";
 import { followUserDTO, loginDTO, signupDto } from "../types/DTO";
 
 export class UserController {
@@ -63,6 +64,7 @@ export class UserController {
       }
     }
   };
+
   unfollowUser = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.body;
@@ -81,5 +83,20 @@ export class UserController {
         res.status(500).send({ message: "Erro ao se conectar com o servidor" });
       }
     }
+  };
+
+  feed = async (req: Request, res: Response): Promise<Post[]> => {
+    try {
+      const token = req.headers.authorization;
+      const posts: Post[] = await this.userBusiness.listOfPosts(token);
+      return posts;
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: error.message });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      }
+    }
+    return [];
   };
 }
