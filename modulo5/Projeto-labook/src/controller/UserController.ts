@@ -89,6 +89,7 @@ export class UserController {
     try {
       const token = req.headers.authorization;
       const posts: Post[] = await this.userBusiness.listOfPosts(token);
+      res.status(200).send({ posts });
       return posts;
     } catch (error) {
       if (error instanceof Error) {
@@ -97,6 +98,5 @@ export class UserController {
         res.status(500).send({ message: "Erro ao se conectar com o servidor" });
       }
     }
-    return [];
   };
 }

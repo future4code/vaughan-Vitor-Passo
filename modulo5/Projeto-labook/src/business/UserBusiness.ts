@@ -133,10 +133,14 @@ export class UserBusiness {
     if (!tokenData) {
       throw new Error("Usuário deslogado");
     }
-    const sendInfoToReturPosts = {
-      friend_id: tokenData.id
-    };
-    const getInfoData = await this.userData.returnPosts(tokenData.id);
+    // const sendInfoToReturPosts = {
+    //   friend_id: tokenData.id
+    // };
+    const test = await this.userData.friends(tokenData.id);
+    console.log("test", test);
+
+    const getInfoData = await this.userData.returnPosts(test.friend_id);
+    console.log(getInfoData);
     return getInfoData;
   };
 }
