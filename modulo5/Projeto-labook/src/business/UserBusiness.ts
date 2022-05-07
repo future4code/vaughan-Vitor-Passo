@@ -133,14 +133,23 @@ export class UserBusiness {
     if (!tokenData) {
       throw new Error("Usuário deslogado");
     }
-    // const sendInfoToReturPosts = {
-    //   friend_id: tokenData.id
-    // };
-    const test = await this.userData.friends(tokenData.id);
-    console.log("test", test);
 
-    const getInfoData = await this.userData.returnPosts(test.friend_id);
-    console.log(getInfoData);
-    return getInfoData;
+    const getFriends = await this.userData.friends(tokenData.id);
+
+    const getAllPosts = await this.userData.returnPosts(getFriends.friend_id);
+
+    return getAllPosts;
+  };
+
+  listOfPostsByType = async (token: string): Promise<Post[]> => {
+    if (!token) throw new Error("É preciso passar um token de acesso");
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) throw new Error("Usuário deslogado");
+
+    const getFriends = await this.userData.friends(tokenData.id);
+    const allPostsByType = await this.userData.returnPostsByType(
+      getFriends.friend_id
+    );
+    return allPostsByType;
   };
 }

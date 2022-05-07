@@ -99,4 +99,21 @@ export class UserController {
       }
     }
   };
+
+  feedByType = async (req: Request, res: Response): Promise<Post[]> => {
+    try {
+      const token = req.headers.authorization;
+      const newFeed: Post[] = await this.userBusiness.listOfPostsByType(token);
+      res.status(200).send({ newFeed });
+      return newFeed;
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: error.message });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      }
+    }
+
+    return;
+  };
 }

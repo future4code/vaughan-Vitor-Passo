@@ -10,4 +10,5 @@ export interface IUserData {
   removeFollow(friend_id: string): Promise<void>;
   friends(user_id: string): Promise<any>;
   returnPosts(friend_id: string): Promise<Post[]>;
+  returnPostsByType(user_id: string): Promise<Post[]>;
 }
