@@ -12,6 +12,7 @@ import {
   loginDTO,
   signupDto
 } from "../types/DTO";
+import { likeInfo } from "../types/like";
 
 export class UserBusiness {
   private userData: IUserData;
@@ -123,33 +124,5 @@ export class UserBusiness {
     }
 
     await this.userData.removeFollow(id);
-  };
-
-  listOfPosts = async (token: string): Promise<Post[]> => {
-    if (!token) {
-      throw new Error("É necessário passar o token de acesso");
-    }
-    const tokenData = this.authenticator.getTokenData(token);
-    if (!tokenData) {
-      throw new Error("Usuário deslogado");
-    }
-
-    const getFriends = await this.userData.friends(tokenData.id);
-
-    const getAllPosts = await this.userData.returnPosts(getFriends.friend_id);
-
-    return getAllPosts;
-  };
-
-  listOfPostsByType = async (token: string): Promise<Post[]> => {
-    if (!token) throw new Error("É preciso passar um token de acesso");
-    const tokenData = this.authenticator.getTokenData(token);
-    if (!tokenData) throw new Error("Usuário deslogado");
-
-    const getFriends = await this.userData.friends(tokenData.id);
-    const allPostsByType = await this.userData.returnPostsByType(
-      getFriends.friend_id
-    );
-    return allPostsByType;
   };
 }

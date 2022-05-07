@@ -38,17 +38,4 @@ export class UserDataBase extends BaseDataBase implements IUserData {
     const tableName = "labebook_friends";
     await this.connection(tableName).insert(followInfos);
   };
-
-  returnPosts = async (user_id: string): Promise<Post[]> => {
-    const tableName = "labebook_posts";
-    const resuls = await this.connection(tableName).where({ user_id });
-    return resuls;
-  };
-  returnPostsByType = async (user_id: string): Promise<Post[]> => {
-    const tableName = "labebook_posts";
-    const resuls = await this.connection(tableName)
-      .where("user_id", "=", `${user_id}`)
-      .where("type", "=", "EVENTO");
-    return resuls;
-  };
 }
