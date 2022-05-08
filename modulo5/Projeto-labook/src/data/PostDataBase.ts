@@ -41,11 +41,12 @@ export class PostDataBase extends BaseDataBase implements IPostData {
     await this.connection(tableName).insert(likeInfosInThePost);
   };
 
-  getLikeById = async (user_id: string): Promise<like> => {
+  getLikeById = async (post_id: string): Promise<like> => {
     const tableName = "labebook_like";
     const [returnLikeById] = await this.connection(tableName).where({
-      user_id
+      post_id
     });
+    console.log("Tem que respeitar a caila", returnLikeById);
     return returnLikeById;
   };
 }

@@ -100,7 +100,7 @@ export class PostBusiness {
 
   likingPost = async (info: likeInfoDTO): Promise<void> => {
     const { id, token } = info;
-    if (!id) throw new Error("É necessário passar um token para curtir o post");
+    if (!id) throw new Error("É necessário passar um id para curtir o post");
     if (!token) throw new Error("É preciso passar um token de acesso");
 
     const tokenData = this.authenticator.getTokenData(token);
@@ -115,10 +115,13 @@ export class PostBusiness {
       user_id: tokenData.id
     };
 
-    const isLikeInThePost = this.postData.getLikeById(tokenData.id);
+    const isLikeInThePost = await this.postData.getLikeById(
+      sendInfoToLikeThePost.post_id
+    );
+    console.log("respeta", isLikeInThePost);
     if (isLikeInThePost) {
       throw new Error("Você já curtiu esse post");
     }
-    this.postData.likeInThePostDataBase(sendInfoToLikeThePost);
+    await this.postData.likeInThePostDataBase(sendInfoToLikeThePost);
   };
 }
