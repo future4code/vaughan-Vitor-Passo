@@ -119,5 +119,6 @@ export class PostBusiness {
     if (isLikeInThePost) {
       throw new Error("Você já curtiu esse post");
     }
+    this.postData.likeInThePostDataBase(sendInfoToLikeThePost);
   };
 }
