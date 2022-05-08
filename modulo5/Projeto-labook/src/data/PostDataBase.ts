@@ -1,5 +1,6 @@
 import { IPostData } from "../model/IPostData";
 import { Post } from "../model/Post";
+import { like, likeInthePostDTO } from "../types/DTO";
 import { friend } from "../types/friend";
 import { BaseDataBase } from "./BaseDataBase";
 
@@ -31,5 +32,20 @@ export class PostDataBase extends BaseDataBase implements IPostData {
       .where("user_id", "=", `${user_id}`)
       .where("type", "=", "EVENTO");
     return resuls;
+  };
+
+  likeInThePostDataBase = async (
+    likeInfosInThePost: likeInthePostDTO
+  ): Promise<void> => {
+    const tableName = "labebook_like";
+    await this.connection(tableName).insert(likeInfosInThePost);
+  };
+
+  getLikeById = async (user_id: string): Promise<like> => {
+    const tableName = "labebook_like";
+    const [returnLikeById] = await this.connection(tableName).where({
+      user_id
+    });
+    return returnLikeById;
   };
 }

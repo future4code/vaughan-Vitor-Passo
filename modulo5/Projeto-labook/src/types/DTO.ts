@@ -31,3 +31,12 @@ export type crendentialDTO = {
   id: string;
   token: string;
 };
+
+export type likeInthePostDTO = {
+  post_id: string;
+  user_id: string;
+};
+
+export type like = {
+  user_id: string;
+};

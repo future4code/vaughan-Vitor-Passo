@@ -1,9 +1,10 @@
+import { isCallLikeExpression } from "typescript";
 import { PostDataBase } from "../data/PostDataBase";
 import { IPostData } from "../model/IPostData";
 import { Post } from "../model/Post";
 import { Authenticator } from "../services/Authenticator";
 import { IdGeneration } from "../services/IdGeneration";
-import { postDTO } from "../types/DTO";
+import { likeInthePostDTO, postDTO } from "../types/DTO";
 import { likeInfoDTO } from "../types/like";
 
 export class PostBusiness {
@@ -106,5 +107,17 @@ export class PostBusiness {
 
     if (!tokenData) throw new Error("Usário Deslogado");
     const getPostById = await this.postData.findPostById(id);
+    if (!getPostById) {
+      throw new Error("Esse post nao existe");
+    }
+    const sendInfoToLikeThePost: likeInthePostDTO = {
+      post_id: id,
+      user_id: tokenData.id
+    };
+
+    const isLikeInThePost = this.postData.getLikeById(tokenData.id);
+    if (isLikeInThePost) {
+      throw new Error("Você já curtiu esse post");
+    }
   };
 }
