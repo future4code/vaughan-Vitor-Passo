@@ -40,3 +40,15 @@ export type likeInthePostDTO = {
 export type like = {
   user_id: string;
 };
+
+export type crendentialToTheCommentDTO = {
+  id: string;
+  token: string;
+  message: string;
+};
+
+export type infosTheCommentDTO = {
+  post_id: string;
+  user_id: string;
+  comments: string;
+};

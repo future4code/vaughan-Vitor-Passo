@@ -20,6 +20,7 @@ app.post("/users/login", userController.login);
 app.post("/unfollow", userController.unfollowUser);
 app.post("/users/follow", userController.followUser);
 app.post("/post", postController.createPost);
+app.post("/post/comments/:id", postController.commentsInThePost);
 app.get("/feed/types", postController.feedByType);
 app.get("/feed", postController.feed);
 app.get("/post/:id", postController.getPostById);

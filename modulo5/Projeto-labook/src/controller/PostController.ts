@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { PostBusiness } from "../business/PostBusiness";
 import { Post } from "../model/Post";
-import { postDTO } from "../types/DTO";
+import { crendentialToTheCommentDTO, postDTO } from "../types/DTO";
 import { deslikeInfoDTO, likeInfoDTO } from "../types/like";
 
 export class PostController {
@@ -106,6 +106,27 @@ export class PostController {
       };
       await this.postBusiness.deslikingPost(deslikeInThePostDTO);
       res.status(200).send({ message: "Post descurtido!" });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: error.message });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      }
+    }
+  };
+
+  commentsInThePost = async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      const token = req.headers.authorization;
+      const message = req.body.message;
+      const sendInfoToCommentsInThePost: crendentialToTheCommentDTO = {
+        id,
+        token,
+        message
+      };
+      await this.postBusiness.commentingInThePost(sendInfoToCommentsInThePost);
+      res.status(201).send({ message: "Você comentou no post" });
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).send({ message: error.message });

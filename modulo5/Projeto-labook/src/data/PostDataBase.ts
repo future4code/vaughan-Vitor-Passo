@@ -1,6 +1,6 @@
 import { IPostData } from "../model/IPostData";
 import { Post } from "../model/Post";
-import { like, likeInthePostDTO } from "../types/DTO";
+import { infosTheCommentDTO, like, likeInthePostDTO } from "../types/DTO";
 import { friend } from "../types/friend";
 import { deslikeInfoDTO, deslikingPostDTO } from "../types/like";
 import { BaseDataBase } from "./BaseDataBase";
@@ -50,6 +50,12 @@ export class PostDataBase extends BaseDataBase implements IPostData {
     await this.connection(tableName).delete().where({ post_id });
   };
 
+  insertCommentsInThePost = async (
+    infosTheComment: infosTheCommentDTO
+  ): Promise<void> => {
+    const tableName: string = "labebook_comments";
+    await this.connection(tableName).insert(infosTheComment);
+  };
   getLikeById = async (post_id: string): Promise<like> => {
     const tableName: string = "labebook_like";
     const [returnLikeById] = await this.connection(tableName).where({

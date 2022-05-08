@@ -4,7 +4,12 @@ import { IPostData } from "../model/IPostData";
 import { Post } from "../model/Post";
 import { Authenticator } from "../services/Authenticator";
 import { IdGeneration } from "../services/IdGeneration";
-import { likeInthePostDTO, postDTO } from "../types/DTO";
+import {
+  crendentialToTheCommentDTO,
+  infosTheCommentDTO,
+  likeInthePostDTO,
+  postDTO
+} from "../types/DTO";
 import { deslikeInfoDTO, deslikingPostDTO, likeInfoDTO } from "../types/like";
 
 export class PostBusiness {
@@ -153,5 +158,32 @@ export class PostBusiness {
       throw new Error("Você já descurtiu esse post");
     }
     await this.postData.deslikeInThePost(sendInfoToDeslikeThePost);
+  };
+
+  commentingInThePost = async (
+    infoComment: crendentialToTheCommentDTO
+  ): Promise<void> => {
+    const { id, token, message } = infoComment;
+    if (!id) {
+      throw new Error("É necessário passar o id do post que deseja comentar");
+    }
+    if (!token) {
+      throw new Error("É necessário passar um token de acesso");
+    }
+
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) {
+      throw new Error("Usuário Inválido");
+    }
+    const verifyExistPost = await this.postData.findPostById(id);
+    if (!verifyExistPost) {
+      throw new Error("Esse post não existe");
+    }
+    const addCommentsInThePost: infosTheCommentDTO = {
+      post_id: verifyExistPost.id,
+      user_id: tokenData.id,
+      comments: message
+    };
+    await this.postData.insertCommentsInThePost(addCommentsInThePost);
   };
 }
