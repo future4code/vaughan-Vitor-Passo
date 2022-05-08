@@ -5,7 +5,7 @@ import { Post } from "../model/Post";
 import { Authenticator } from "../services/Authenticator";
 import { IdGeneration } from "../services/IdGeneration";
 import { likeInthePostDTO, postDTO } from "../types/DTO";
-import { likeInfoDTO } from "../types/like";
+import { deslikeInfoDTO, deslikingPostDTO, likeInfoDTO } from "../types/like";
 
 export class PostBusiness {
   private idGeneration: IdGeneration;
@@ -118,10 +118,40 @@ export class PostBusiness {
     const isLikeInThePost = await this.postData.getLikeById(
       sendInfoToLikeThePost.post_id
     );
-    console.log("respeta", isLikeInThePost);
+
     if (isLikeInThePost) {
       throw new Error("Você já curtiu esse post");
     }
     await this.postData.likeInThePostDataBase(sendInfoToLikeThePost);
+  };
+
+  deslikingPost = async (infoDeslike: deslikeInfoDTO): Promise<void> => {
+    const { id, token } = infoDeslike;
+    if (!id) {
+      throw new Error("É preciso passar o id do post que deseja descurtir!");
+    }
+    if (!token) {
+      throw new Error("É preciso passar um token de acesso");
+    }
+    const tokenData = this.authenticator.getTokenData(token);
+    if (!tokenData) {
+      throw new Error("Usuário deslogado");
+    }
+
+    const sendInfoToDeslikeThePost: deslikingPostDTO = {
+      post_id: id,
+      user_id: tokenData.id
+    };
+    const verifyExistPost = await this.postData.findPostById(id);
+    if (!verifyExistPost) {
+      throw new Error("Esse post não existe");
+    }
+    const isDeslikeInThePost = await this.postData.getLikeById(
+      sendInfoToDeslikeThePost.post_id
+    );
+    if (!isDeslikeInThePost) {
+      throw new Error("Você já descurtiu esse post");
+    }
+    await this.postData.deslikeInThePost(sendInfoToDeslikeThePost);
   };
 }

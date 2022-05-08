@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { PostBusiness } from "../business/PostBusiness";
 import { Post } from "../model/Post";
 import { postDTO } from "../types/DTO";
-import { likeInfoDTO } from "../types/like";
+import { deslikeInfoDTO, likeInfoDTO } from "../types/like";
 
 export class PostController {
   constructor(private postBusiness: PostBusiness) {}
@@ -87,6 +87,25 @@ export class PostController {
       };
       await this.postBusiness.likingPost(sendInfoToLikeThePost);
       res.status(200).send({ message: "Curtiu o post" });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: error.message });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
+      }
+    }
+  };
+
+  deslikeInThePost = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const id = req.body.id;
+      const token = req.headers.authorization;
+      const deslikeInThePostDTO: deslikeInfoDTO = {
+        id,
+        token
+      };
+      await this.postBusiness.deslikingPost(deslikeInThePostDTO);
+      res.status(200).send({ message: "Post descurtido!" });
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).send({ message: error.message });

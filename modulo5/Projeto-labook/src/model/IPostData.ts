@@ -1,5 +1,6 @@
 import { like, likeInthePostDTO } from "../types/DTO";
 import { friend } from "../types/friend";
+import { deslikeInfoDTO, deslikingPostDTO } from "../types/like";
 import { Post } from "./Post";
 
 export interface IPostData {
@@ -9,5 +10,6 @@ export interface IPostData {
   returnPosts(user_id: string): Promise<Post[]>;
   friends(user_id: string): Promise<friend>;
   likeInThePostDataBase(likeInfosInThePost: likeInthePostDTO): Promise<void>;
+  deslikeInThePost(infoDeslike: deslikingPostDTO): Promise<void>;
   getLikeById(user_id: string): Promise<like>;
 }
