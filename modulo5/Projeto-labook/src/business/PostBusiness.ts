@@ -4,12 +4,12 @@ import { Post } from "../model/Post";
 import { Authenticator } from "../services/Authenticator";
 import { IdGeneration } from "../services/IdGeneration";
 import { postDTO } from "../types/DTO";
-import { likeInfo } from "../types/like";
+import { likeInfoDTO } from "../types/like";
 
 export class PostBusiness {
   private idGeneration: IdGeneration;
   private authenticator: Authenticator;
-  private postData: PostDataBase;
+  private postData: IPostData;
   constructor(userRepository: PostDataBase) {
     this.idGeneration = new IdGeneration();
     this.authenticator = new Authenticator();
@@ -61,17 +61,19 @@ export class PostBusiness {
     const post = await this.postData.findPostById(id);
     return post;
   };
+
   listOfPosts = async (token: string): Promise<Post[]> => {
     if (!token) {
       throw new Error("É necessário passar o token de acesso");
     }
-    const tokenData = this.authenticator.getTokenData(token);
+    const tokenData = await this.authenticator.getTokenData(token);
     if (!tokenData) {
       throw new Error("Usuário deslogado");
     }
-
     const getFriends = await this.postData.friends(tokenData.id);
-
+    if (!getFriends) {
+      throw new Error("Feed vazio");
+    }
     const getAllPosts = await this.postData.returnPosts(getFriends.friend_id);
 
     return getAllPosts;
@@ -83,21 +85,26 @@ export class PostBusiness {
     if (!tokenData) throw new Error("Usuário deslogado");
 
     const getFriends = await this.postData.friends(tokenData.id);
+    if (!getFriends) {
+      throw new Error("Feed Vazio");
+    }
     const allPostsByType = await this.postData.returnPostsByType(
       getFriends.friend_id
     );
+    if (allPostsByType.length === 0) {
+      throw new Error("Feed Vazio");
+    }
     return allPostsByType;
   };
 
-  likingPost = async (info: likeInfo): Promise<string> => {
+  likingPost = async (info: likeInfoDTO): Promise<void> => {
     const { id, token } = info;
     if (!id) throw new Error("É necessário passar um token para curtir o post");
     if (!token) throw new Error("É preciso passar um token de acesso");
 
     const tokenData = this.authenticator.getTokenData(token);
-    if (!tokenData) throw new Error("Usário Deslogado");
 
-    // const getPost = this.us
-    return "ellenzinha do meu coração, te amo mil e milhão";
+    if (!tokenData) throw new Error("Usário Deslogado");
+    const getPostById = await this.postData.findPostById(id);
   };
 }

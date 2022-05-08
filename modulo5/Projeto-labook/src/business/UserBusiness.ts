@@ -1,18 +1,16 @@
-import { UserDataBase } from "../data/UserDataBase";
 import { IUserData } from "../model/IUserData";
-import { Post } from "../model/Post";
 import { User } from "../model/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGeneration } from "../services/IdGeneration";
 import { authenticationData } from "../types/authenticationData";
 import {
-  followUserDTO,
+  crendentialDTO,
+  followingUserDTO,
   followUserInfo,
   loginDTO,
   signupDto
 } from "../types/DTO";
-import { likeInfo } from "../types/like";
 
 export class UserBusiness {
   private userData: IUserData;
@@ -32,7 +30,14 @@ export class UserBusiness {
         "Por favor, preencha os campos 'name', 'email' e 'password' "
       );
     }
-
+    if (email.indexOf("@") === -1) {
+      throw new Error(
+        "O email não está com o formato correto, por favor coloque '@'"
+      );
+    }
+    if (password.length < 8) {
+      throw new Error("A senha tem que ter no mínimo 8 caractéres");
+    }
     const verifyExistUser = await this.userData.findUserByEmail(email);
     if (verifyExistUser) {
       throw new Error("Usuário já existe");
@@ -61,10 +66,13 @@ export class UserBusiness {
     }
 
     const user = await this.userData.findUserByEmail(email);
-    const isPassword = this.hashPassword.compareHash(password, user.password);
 
-    if (!isPassword) {
-      throw new Error("Senha incorreta");
+    if (!user) {
+      throw new Error("Credenciais inválidas");
+    }
+    const isPassword = this.hashPassword.compareHash(password, user.password);
+    if (!isPassword || !user) {
+      throw new Error("Credenciais inválidas");
     }
     const payload: authenticationData = {
       id: user.id
@@ -72,7 +80,7 @@ export class UserBusiness {
     const token = this.authenticator.generationToken(payload);
     return token;
   };
-  doingNewFrind = async (followInfos: followUserInfo): Promise<void> => {
+  doingNewFrind = async (followInfos: crendentialDTO): Promise<void> => {
     const { id, token } = followInfos;
     if (!id) {
       throw new Error(
@@ -95,14 +103,15 @@ export class UserBusiness {
     if (isVerifyId) {
       throw new Error("Você já segue esse usuário");
     }
-    const following: followUserDTO = {
+    const following: followingUserDTO = {
       user_id: tokenData.id,
       friend_id: id
     };
+
     this.userData.insertNewFriend(following);
   };
 
-  removeFriend = async (followInfos: followUserInfo) => {
+  removeFriend = async (followInfos: crendentialDTO): Promise<void> => {
     const { id, token } = followInfos;
     if (!id) {
       throw new Error(

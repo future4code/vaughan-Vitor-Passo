@@ -1,7 +1,7 @@
 import { IUserData } from "../model/IUserData";
 import { Post } from "../model/Post";
 import { User } from "../model/User";
-import { followUserDTO } from "../types/DTO";
+import { followingUserDTO } from "../types/DTO";
 import { BaseDataBase } from "./BaseDataBase";
 
 export class UserDataBase extends BaseDataBase implements IUserData {
@@ -34,7 +34,7 @@ export class UserDataBase extends BaseDataBase implements IUserData {
     await this.connection(tableName).insert(user);
   };
 
-  insertNewFriend = async (followInfos: followUserDTO): Promise<void> => {
+  insertNewFriend = async (followInfos: followingUserDTO): Promise<void> => {
     const tableName = "labebook_friends";
     await this.connection(tableName).insert(followInfos);
   };

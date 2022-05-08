@@ -14,11 +14,12 @@ export class PostDataBase extends BaseDataBase implements IPostData {
     await this.connection(tableName).insert(post);
   };
 
-  async friends(user_id: string): Promise<friend> {
+  friends = async (user_id: string): Promise<friend> => {
     const tableName = "labebook_friends";
     const [searchFollow] = await this.connection(tableName).where({ user_id });
+    console.log("eu amo a ellen", [searchFollow]);
     return searchFollow;
-  }
+  };
   returnPosts = async (user_id: string): Promise<Post[]> => {
     const tableName = "labebook_posts";
     const resuls = await this.connection(tableName).where({ user_id });

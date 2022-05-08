@@ -1,4 +1,4 @@
-export type likeInfo = {
+export type likeInfoDTO = {
   id: string;
   token: string;
 };

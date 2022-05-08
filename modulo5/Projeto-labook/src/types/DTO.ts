@@ -18,7 +18,7 @@ export type postDTO = {
   token: string;
 };
 
-export type followUserDTO = {
+export type followingUserDTO = {
   user_id: string;
   friend_id: string;
 };
@@ -27,7 +27,7 @@ export type followUserInfo = {
   token: string;
 };
 
-// export type crendential = {
-//   id: string;
-//   token: string;
-// };
+export type crendentialDTO = {
+  id: string;
+  token: string;
+};

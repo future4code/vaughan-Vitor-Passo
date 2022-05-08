@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { Post } from "../model/Post";
-import { followUserDTO, loginDTO, signupDto } from "../types/DTO";
-import { likeInfo } from "../types/like";
+
+import { crendentialDTO, loginDTO, signupDto } from "../types/DTO";
 
 export class UserController {
   constructor(private userBusiness: UserBusiness) {}
@@ -50,10 +49,11 @@ export class UserController {
     try {
       const { id } = req.body;
       const token = req.headers.authorization;
-      const sendInfoForFollowUser = {
+      const sendInfoForFollowUser: crendentialDTO = {
         id,
         token
       };
+
       await this.userBusiness.doingNewFrind(sendInfoForFollowUser);
 
       res.status(200).send({ message: "Parabéns você tem um novo amigo" });
@@ -70,7 +70,7 @@ export class UserController {
     try {
       const { id } = req.body;
       const token = req.headers.authorization;
-      const sendInfoForFollowUser = {
+      const sendInfoForFollowUser: crendentialDTO = {
         id,
         token
       };

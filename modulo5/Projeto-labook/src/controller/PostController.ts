@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { PostBusiness } from "../business/PostBusiness";
 import { Post } from "../model/Post";
-import { likeInfo } from "../types/like";
+import { postDTO } from "../types/DTO";
+import { likeInfoDTO } from "../types/like";
 
 export class PostController {
   constructor(private postBusiness: PostBusiness) {}
@@ -9,14 +10,14 @@ export class PostController {
     try {
       const { photo, description, type } = req.body;
       const token = req.headers.authorization;
-      const createPost = {
+      const createPostInput: postDTO = {
         photo,
         description,
         type,
         token
       };
 
-      await this.postBusiness.addPost(createPost);
+      await this.postBusiness.addPost(createPostInput);
 
       res.status(201).send({ message: "Post criado com sucesso" });
     } catch (error) {
@@ -46,6 +47,7 @@ export class PostController {
   feed = async (req: Request, res: Response): Promise<Post[]> => {
     try {
       const token = req.headers.authorization;
+
       const posts: Post[] = await this.postBusiness.listOfPosts(token);
       res.status(200).send({ posts });
       return posts;
@@ -75,18 +77,16 @@ export class PostController {
     return;
   };
 
-  likeInThePost = async (req: Request, res: Response): Promise<string> => {
+  likeInThePost = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.body;
       const token = req.headers.authorization;
-      const sendInfoToLikeThePost: likeInfo = {
+      const sendInfoToLikeThePost: likeInfoDTO = {
         id,
         token
       };
-      const like: string = await this.postBusiness.likingPost(
-        sendInfoToLikeThePost
-      );
-      return like;
+      await this.postBusiness.likingPost(sendInfoToLikeThePost);
+      res.status(200).send({ message: "Curtiu o post" });
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).send({ message: error.message });
