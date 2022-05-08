@@ -79,7 +79,7 @@ export class PostController {
 
   likeInThePost = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { id } = req.body;
+      const id = req.params.id;
       const token = req.headers.authorization;
       const sendInfoToLikeThePost: likeInfoDTO = {
         id,
@@ -98,7 +98,7 @@ export class PostController {
 
   deslikeInThePost = async (req: Request, res: Response): Promise<void> => {
     try {
-      const id = req.body.id;
+      const id = req.params.id;
       const token = req.headers.authorization;
       const deslikeInThePostDTO: deslikeInfoDTO = {
         id,
