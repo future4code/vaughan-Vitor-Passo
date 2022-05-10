@@ -38,11 +38,27 @@ test("Pegando brasileiros que tem acesso ao cassino", () => {
     name: "Test",
     location: LOCATION.BRAZIL
   };
-  const user: User = {
+  const user1: User = {
     name: "Vitor",
     age: 18,
     nacionality: NACIONALITY.BRAZILIAN
   };
-  const result = verifyAge(casino, [user]);
-  expect(result).toEqual({})
+  const user2: User = {
+    name: "Ellen",
+    age: 20,
+    nacionality: NACIONALITY.BRAZILIAN
+  };
+  const user3: User = {
+    name: "JÃO",
+    age: 20,
+    nacionality: NACIONALITY.AMERICAN
+  };
+  const user4: User = {
+    name: "Furiqueira",
+    age: 25,
+    nacionality: NACIONALITY.AMERICAN
+  };
+  const result = verifyAge(casino, [user1, user2, user3, user4]);
+  expect(result.brazilians.unallowed).toEqual(["Vitor, Ellen"]);
+  expect(result.americans.allowed).toEqual(["JÃO, Furiqueira"]);
 });

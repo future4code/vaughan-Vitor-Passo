@@ -23,3 +23,14 @@ export interface Casino {
   name: string;
   location: LOCATION;
 }
+export interface Result {
+  brazil: any;
+  EUA: any;
+  brazilians: ResultItem;
+  americans: ResultItem;
+}
+
+export interface ResultItem {
+  allowed: string[];
+  unallowed: string[];
+}
