@@ -1,5 +1,9 @@
 import { Pokemons } from "../types/pokemons";
 
 export interface IPokemon {
-  getAllPokemons(): Promise<Pokemons[]>;
+  getAllPokemons(
+    offset: number,
+    quantifyPokemonRend: number
+  ): Promise<Pokemons[]>;
+  getPokemonByName(name: string): Promise<Pokemons>;
 }

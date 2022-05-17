@@ -11,3 +11,6 @@ const pokemonController = new PokemonController(pokemonBusiness);
 pokemonRouter.get("/all", (req, res) =>
   pokemonController.listAllPokemons(req, res)
 );
+pokemonRouter.get("/:name", (req, res) =>
+  pokemonController.getPokemonByName(req, res)
+);
