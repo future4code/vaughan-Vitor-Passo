@@ -14,3 +14,7 @@ pokemonRouter.get("/all", (req, res) =>
 pokemonRouter.get("/:name", (req, res) =>
   pokemonController.getPokemonByName(req, res)
 );
+
+pokemonRouter.post("/battle", (req, res) =>
+  pokemonController.battlePokemon(req, res)
+);

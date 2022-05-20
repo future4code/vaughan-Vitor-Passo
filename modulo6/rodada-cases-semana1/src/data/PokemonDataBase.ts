@@ -1,5 +1,5 @@
 import { IPokemon } from "../model/IPokemon";
-import { Pokemons } from "../types/pokemons";
+import { pokemonBattle, Pokemons } from "../types/pokemons";
 import { BaseDataBase } from "./BaseDataBase";
 
 export class PokemonDataBase extends BaseDataBase implements IPokemon {
@@ -17,11 +17,26 @@ export class PokemonDataBase extends BaseDataBase implements IPokemon {
     return pokemons;
   }
 
-  async getPokemonByName(name: string): Promise<Pokemons> {
+  async getPokemonByName(name: string): Promise<pokemonBattle> {
     const pokemons = await this.getConnection()
-      //   .select("name", "Type_1", "Type_2")
+      .select("name", "Type_1", "Type_2", "ATK", "DEF")
       .from(this.TABLE_NAME)
       .where({ name });
     return pokemons[0];
+  }
+
+  async battlePokemons(
+    pokemon1: pokemonBattle,
+    pokemon2: pokemonBattle
+  ): Promise<pokemonBattle> {
+    const resultBattle = await this.getConnection()
+      .select("name")
+      .from(this.TABLE_NAME);
+    // .where(`${pokemon1.ATK}`, ">", `${pokemon2.DEF}`)
+    // .orWhere(`${pokemon1.ATK}`, "<", `${pokemon2.DEF}`)
+    // .orWhere(`${pokemon2.ATK}`, ">", `${pokemon1.DEF}`)
+    // .orWhere(`${pokemon2.ATK}`, "<", `${pokemon1.DEF}`)
+    // .orWhere(`${pokemon1.ATK}`, "=", `${pokemon2.DEF}`);
+    return resultBattle[0];
   }
 }
