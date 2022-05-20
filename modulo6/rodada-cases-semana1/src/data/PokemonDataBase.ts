@@ -29,7 +29,7 @@ export class PokemonDataBase extends BaseDataBase implements IPokemon {
     const pokemons = await this.getConnection()
       .select("name", "Type_1", "Type_2", "ATK", "DEF")
       .from(this.TABLE_NAME)
-      .where({ Type_1: type })
+      .whereLike("Type_1", `${type}%`)
       .limit(5)
       .offset(offset);
     return pokemons;
