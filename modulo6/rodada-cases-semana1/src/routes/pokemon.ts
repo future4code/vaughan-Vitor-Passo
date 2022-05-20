@@ -11,10 +11,13 @@ const pokemonController = new PokemonController(pokemonBusiness);
 pokemonRouter.get("/all", (req, res) =>
   pokemonController.listAllPokemons(req, res)
 );
+pokemonRouter.get("/types", (req, res) =>
+  pokemonController.returnPokemonByType(req, res)
+);
+
 pokemonRouter.get("/:name", (req, res) =>
   pokemonController.getPokemonByName(req, res)
 );
-
 pokemonRouter.post("/battle", (req, res) =>
   pokemonController.battlePokemon(req, res)
 );

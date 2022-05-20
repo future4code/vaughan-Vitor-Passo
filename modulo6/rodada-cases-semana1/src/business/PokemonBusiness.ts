@@ -1,23 +1,21 @@
 import { BaseError } from "../error/BaseError";
 import { IPokemon } from "../model/IPokemon";
-import { battlePokemonDTO, Pokemons } from "../types/pokemons";
+import { battlePokemonDTO, pokemonBattle, Pokemons } from "../types/pokemons";
 
 export class PokemonBusiness {
   constructor(private pokemonData: IPokemon) {}
-  getAllPokemons = async (
-    pages: number,
-    typePokemon: string
-  ): Promise<Pokemons[]> => {
+  getAllPokemons = async (pages: number): Promise<Pokemons[]> => {
     if (pages <= 0) {
-      throw new BaseError("Pagina somente acima de 1", 422);
+      throw new BaseError("Pagina somente acima de 1", 404);
     }
     const quantifyPokemonRend: number = 5;
     const offset: number = quantifyPokemonRend * (pages - 1);
 
-    const pokemons = await this.pokemonData.getAllPokemons(
-      offset,
-      quantifyPokemonRend
-    );
+    const pokemons = await this.pokemonData.getAllPokemons(offset);
+
+    if (pokemons.length <= 0) {
+      throw new BaseError("Página não encontrada", 404);
+    }
 
     return pokemons;
   };
@@ -25,7 +23,7 @@ export class PokemonBusiness {
   getPokemonByName = async (name: string): Promise<Pokemons> => {
     const pokemon = await this.pokemonData.getPokemonByName(name);
     if (!pokemon) {
-      throw new BaseError("Esse pokemon não existe", 409);
+      throw new BaseError("Esse pokemon não existe", 404);
     }
     return pokemon;
   };
@@ -62,5 +60,22 @@ export class PokemonBusiness {
       };
     }
     return result;
+  };
+
+  getAllPokemonByType = async (
+    type: string,
+    pagesNumber: number
+  ): Promise<pokemonBattle[]> => {
+    if (pagesNumber <= 0) {
+      throw new BaseError("Pagina somente acima de 1", 404);
+    }
+    const quantifyPokemonRend: number = 5;
+    const offset: number = quantifyPokemonRend * (pagesNumber - 1);
+
+    const pokeType = await this.pokemonData.getAllPokemonsByType(offset, type);
+    if (pokeType.length <= 0) {
+      throw new BaseError("Página não encontrada", 404);
+    }
+    return pokeType;
   };
 }

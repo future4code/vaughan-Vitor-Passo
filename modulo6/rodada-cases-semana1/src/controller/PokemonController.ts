@@ -9,11 +9,7 @@ export class PokemonController {
     try {
       const pages = req.query.pages;
       const pagesNumber = Number(pages);
-      const typePokemon = req.query.type as string;
-      const pokemons = await this.pokemonBusiness.getAllPokemons(
-        pagesNumber,
-        typePokemon
-      );
+      const pokemons = await this.pokemonBusiness.getAllPokemons(pagesNumber);
       res.status(200).send({ pokemons });
     } catch (error) {
       if (error instanceof BaseError) {
@@ -29,8 +25,8 @@ export class PokemonController {
   getPokemonByName = async (req: Request, res: Response): Promise<void> => {
     try {
       const name = req.params.name;
-      const result = await this.pokemonBusiness.getPokemonByName(name);
-      res.status(200).send({ result });
+      const pokemon = await this.pokemonBusiness.getPokemonByName(name);
+      res.status(200).send({ pokemon });
     } catch (error) {
       if (error instanceof BaseError) {
         res.status(error.code).send({ message: error.message });
@@ -59,6 +55,27 @@ export class PokemonController {
         res.status(400).send({ error: error.sqlMessage });
       } else {
         res.status(500).send({ message: "F" });
+      }
+    }
+  };
+
+  returnPokemonByType = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const typePokemon = req.query.type as string;
+      const pages = req.query.pages;
+      const pagesNumber = Number(pages);
+      const pokemonByType = await this.pokemonBusiness.getAllPokemonByType(
+        typePokemon,
+        pagesNumber
+      );
+      res.status(200).send({ pokemonByType });
+    } catch (error) {
+      if (error instanceof BaseError) {
+        res.status(error.code).send({ message: error.message });
+      } else if (error) {
+        res.status(400).send({ message: error.sqlMessage });
+      } else {
+        res.status(500).send({ message: "Erro ao se conectar com o servidor" });
       }
     }
   };
