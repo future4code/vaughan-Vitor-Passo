@@ -7,6 +7,7 @@ export class CreateTourDogController {
   constructor(private createTourDogBussiness: CreateTourDogBusiness) {}
   createTourController = async (req: Request, res: Response): Promise<void> => {
     try {
+      // const { date, duration, pets, startWalk, finishWalk } = req.body;
       const { date, duration, pets, startWalk, finishWalk } = req.body;
       const createTourDogDTO: createTourDogDTO = {
         date,
